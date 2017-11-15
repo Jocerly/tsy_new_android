@@ -35,4 +35,8 @@ dependencies {
     implementation deps.support.constraint_layout
     implementation deps.support.vector_drawable
 
+    //swipeBack
+    implementation deps.swipebacklayout
+    implementation deps.statusbar
+
 }
