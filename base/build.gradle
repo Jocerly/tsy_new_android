@@ -3,8 +3,6 @@ apply plugin: 'com.android.library'
 android {
     compileSdkVersion 26
 
-
-
     defaultConfig {
         minSdkVersion 14
         targetSdkVersion 26
@@ -26,9 +24,27 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+    testImplementation deps.junit
 
-    implementation 'com.android.support:appcompat-v7:26.1.0'
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'com.android.support.test:runner:1.0.1'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+    implementation deps.support.app_compat
+
+    // RxJava
+    implementation deps.rx_android
+    implementation deps.rxjava2
+
+    // Retrofit
+    implementation deps.retrofit.runtime, { exclude group: 'okhttp' }
+    implementation deps.retrofit.gson
+    implementation deps.retrofit.rxjava2
+
+    // Okhttp
+    implementation deps.okhttp.runtime
+    implementation deps.okhttp.logging
+
+    // Glide
+    implementation deps.glide
+
+    // Timber
+    implementation deps.timber
+
 }
