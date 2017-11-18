@@ -26,10 +26,7 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     testImplementation deps.junit
 
-    implementation deps.support.app_compat
-
     // RxJava
-    implementation deps.rx_android
     implementation deps.rxjava2
 
     // Retrofit

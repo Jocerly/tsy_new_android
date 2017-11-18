@@ -20,28 +20,3 @@ task clean(type: Delete) {
     delete rootProject.buildDir
 }
 
-ext {
-    // Sdk and tools
-    minSdkVersion = 14
-    targetSdkVersion = 26
-    compileSdkVersion = 26
-    buildToolsVersion = '26.0.1'
-
-    // App version
-    versionCode = 1
-    versionName = "1.0"
-
-    // App dependencies
-    supportLibraryVersion = '26.1.0'
-    constraintLayoutVersion = '1.0.2'
-    junitVersion = '4.12'
-    espressoVersion = '3.0.1'
-    testRummerVersion = '1.0.1'
-
-    // network
-    okhttpVersion = '3.9.0'
-
-
-
-}
-

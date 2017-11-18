@@ -22,21 +22,23 @@ android {
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
     testImplementation deps.junit
-
+    implementation project(':base')
     // kotlin
     implementation deps.kotlin.stdlib
-
     // Support libraries
     implementation deps.support.app_compat
     implementation deps.support.v4
     implementation deps.support.design
     implementation deps.support.constraint_layout
     implementation deps.support.vector_drawable
-
-    //swipeBack
+    // swipeBack
     implementation deps.swipebacklayout
     implementation deps.statusbar
+    implementation deps.multidex
+    // RxJava
+    implementation deps.rx_android
+    implementation deps.rx_binding2
 
 }
