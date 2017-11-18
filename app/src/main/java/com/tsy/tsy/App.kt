@@ -1,7 +1,6 @@
 package com.tsy.tsy
 
 import android.support.multidex.MultiDexApplication
-import cn.bingoogolapple.swipebacklayout.BGASwipeBackHelper
 
 /**
  * Created by jay on 2017/11/15.
@@ -16,7 +15,5 @@ class App : MultiDexApplication() {
 
     override fun onCreate() {
         super.onCreate()
-
-        BGASwipeBackHelper.init(this, null)
     }
 }

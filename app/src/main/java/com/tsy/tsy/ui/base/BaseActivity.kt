@@ -1,24 +1,39 @@
 package com.tsy.tsy.ui.base
 
+import android.app.ProgressDialog
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
-import cn.bingoogolapple.swipebacklayout.BGASwipeBackHelper
+import com.tsy.tsy.ui.base.support.SupportActivity
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
+import me.yokeyword.fragmentation.SwipeBackLayout
+import me.yokeyword.fragmentation_swipeback.core.ISwipeBackActivity
+import me.yokeyword.fragmentation_swipeback.core.SwipeBackActivityDelegate
 
 /**
  * Created by jay on 2017/11/15.
  */
 
-open class BaseActivity : AppCompatActivity(), BGASwipeBackHelper.Delegate {
+open class BaseActivity : SupportActivity(), ISwipeBackActivity {
+
+    private val swipeBackDelegate = SwipeBackActivityDelegate(this)
 
     private val compositeDisposable = CompositeDisposable()
 
-    protected lateinit var swipeBackHelper: BGASwipeBackHelper
+    private lateinit var dialog: ProgressDialog;
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        initSwipeFinish()
         super.onCreate(savedInstanceState)
+        swipeBackDelegate.onCreate(savedInstanceState)
+
+        dialog = ProgressDialog(this)
+        dialog.isIndeterminate = true
+        dialog.setMessage("请稍后...")
+        dialog.setCanceledOnTouchOutside(false)
+    }
+
+    override fun onPostCreate(savedInstanceState: Bundle?) {
+        super.onPostCreate(savedInstanceState)
+        swipeBackDelegate.onPostCreate(savedInstanceState)
     }
 
     override fun onDestroy() {
@@ -26,35 +41,35 @@ open class BaseActivity : AppCompatActivity(), BGASwipeBackHelper.Delegate {
         super.onDestroy()
     }
 
+    protected fun showProgress(show: Boolean) {
+        if (show) {
+            dialog.show()
+        } else {
+            dialog.dismiss()
+        }
+    }
+
     protected fun addDisposable(disposable: Disposable) {
         compositeDisposable.add(disposable)
     }
 
-    private fun initSwipeFinish() {
-        swipeBackHelper = BGASwipeBackHelper(this, this)
+    override fun getSwipeBackLayout(): SwipeBackLayout {
+        return swipeBackDelegate.swipeBackLayout
     }
 
-    override fun onBackPressed() {
-        if(swipeBackHelper.isSliding) {
-            return
-        }
-        swipeBackHelper.backward()
+    override fun setEdgeLevel(edgeLevel: SwipeBackLayout.EdgeLevel?) {
+        swipeBackDelegate.setEdgeLevel(edgeLevel)
     }
 
-    override fun onSwipeBackLayoutExecuted() {
-        swipeBackHelper.swipeBackward()
+    override fun setEdgeLevel(widthPixel: Int) {
+        swipeBackDelegate.setEdgeLevel(widthPixel)
     }
 
-    override fun onSwipeBackLayoutSlide(slideOffset: Float) {
-
+    override fun swipeBackPriority(): Boolean {
+        return swipeBackDelegate.swipeBackPriority()
     }
 
-    override fun onSwipeBackLayoutCancel() {
-
+    override fun setSwipeBackEnable(enable: Boolean) {
+        swipeBackDelegate.setSwipeBackEnable(enable)
     }
-
-    override fun isSupportSwipeBack(): Boolean {
-        return true
-    }
-
 }

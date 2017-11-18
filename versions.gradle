@@ -16,7 +16,8 @@ versions.statusbar = "1.4.0"
 versions.swipebacklayout = "1.1.6"
 versions.rxlifecycle = "2.2.0"
 versions.multidex = "1.0.2"
-vserions.fragmentation = "1.1.8"
+versions.fragmentation = "1.1.8"
+versions.permissionsdispatcher = "3.0.1"
 
 def support = [:]
 support.app_compat = "com.android.support:appcompat-v7:$versions.support"
@@ -60,6 +61,8 @@ deps.swipebacklayout = "cn.bingoogolapple:bga-swipebacklayout:$versions.swipebac
 deps.multidex = "com.android.support:multidex:$versions.multidex"
 deps.fragmentation_core = "me.yokeyword:fragmentation-core:$versions.fragmentation"
 deps.fragmentation_swipeback = "me.yokeyword:fragmentation-swipeback:$versions.fragmentation"
+deps.permissionsdispatcher = "com.github.hotchemi:permissionsdispatcher:$versions.permissionsdispatcher"
+deps.permissionsdispatcher_processor = "com.github.hotchemi:permissionsdispatcher-processor:$versions.permissionsdispatcher"
 deps.android_gradle_plugin = "com.android.tools.build:gradle:$versions.android_gradle_plugin"
 ext.deps = deps
 

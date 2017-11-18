@@ -34,11 +34,14 @@ dependencies {
     implementation deps.support.constraint_layout
     implementation deps.support.vector_drawable
     // swipeBack
-    implementation deps.swipebacklayout
-    implementation deps.statusbar
+    implementation deps.fragmentation_core
+    implementation deps.fragmentation_swipeback
     implementation deps.multidex
     // RxJava
     implementation deps.rx_android
     implementation deps.rx_binding2
+    //permissionsdispatcher
+    implementation deps.permissionsdispatcher
+    annotationProcessor deps.permissionsdispatcher_processor
 
 }
