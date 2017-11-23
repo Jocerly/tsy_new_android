@@ -22,15 +22,15 @@ interface TsyApi {
     @FormUrlEncoded
     @POST("statistics/cm-click")
     fun cmClick(@Field("clk_page_uri") pageUri: String, @Field("clk_target_url") targetUrl: String, @Field("clk_item_index") itemIndex: String,
-                @Field("clk_name_en") nameEn: String, @Field("opt_queryword") queryword: String) : Flowable<HttpResult<Any>>
+                @Field("clk_name_en") nameEn: String, @Field("opt_queryword") queryword: String): Flowable<HttpResult<Any>>
 
     // 神策统计－页面访问
     @FormUrlEncoded
     @POST("statistics/page-view")
-    fun pageView(@Field("viw_page_uri") pageUri: String, @Field("viw_page_name_zh") pageNameZh: String) : Flowable<HttpResult<Any>>
+    fun pageView(@Field("viw_page_uri") pageUri: String, @Field("viw_page_name_zh") pageNameZh: String): Flowable<HttpResult<Any>>
 
     // App更新
     @GET("app-version/checkversion")
-    fun  appUpdate()
-    
+    fun appUpdate(): Flowable<HttpResult<Any>>
+
 }

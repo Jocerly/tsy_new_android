@@ -1,4 +1,5 @@
 apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
 
 android {
     compileSdkVersion 26
@@ -26,6 +27,10 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     testImplementation deps.junit
 
+    // kotlin
+    implementation deps.kotlin.stdlib
+
+    implementation deps.support.v4
     // RxJava
     implementation deps.rxjava2
 
@@ -44,4 +49,7 @@ dependencies {
     // Timber
     implementation deps.timber
 
+}
+repositories {
+    mavenCentral()
 }

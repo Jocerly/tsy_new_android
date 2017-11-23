@@ -43,5 +43,7 @@ dependencies {
     //permissionsdispatcher
     implementation deps.permissionsdispatcher
     annotationProcessor deps.permissionsdispatcher_processor
+    //anko
+    implementation deps.anko.runtime
 
 }
