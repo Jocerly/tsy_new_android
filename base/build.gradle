@@ -1,12 +1,11 @@
 apply plugin: 'com.android.library'
-apply plugin: 'kotlin-android'
 
 android {
-    compileSdkVersion 26
+    compileSdkVersion build_versions.target_sdk
 
     defaultConfig {
-        minSdkVersion 14
-        targetSdkVersion 26
+        minSdkVersion build_versions.min_sdk
+        targetSdkVersion build_versions.target_sdk
         versionCode 1
         versionName "1.0"
 
@@ -21,34 +20,27 @@ android {
         }
     }
 
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
     testImplementation deps.junit
-
-    // kotlin
-    implementation deps.kotlin.stdlib
-
     implementation deps.support.v4
     // RxJava
     implementation deps.rxjava2
-
     // Retrofit
     implementation deps.retrofit.runtime, { exclude group: 'okhttp' }
     implementation deps.retrofit.gson
     implementation deps.retrofit.rxjava2
-
     // Okhttp
     implementation deps.okhttp.runtime
     implementation deps.okhttp.logging
-
     // Glide
     implementation deps.glide
-
-    // Timber
-    implementation deps.timber
-
 }
 repositories {
     mavenCentral()

@@ -1,7 +1,9 @@
 package com.tsy.base.api.error;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.text.TextUtils;
+import android.util.Log;
 
 import com.tsy.base.R;
 import com.tsy.base.api.error.exception.NetworkConnectionException;
@@ -11,7 +13,6 @@ import com.tsy.base.api.error.exception.ResponseException;
 import java.net.UnknownHostException;
 
 import retrofit2.HttpException;
-import timber.log.Timber;
 
 /**
  * Created by jay on 17/8/1.
@@ -23,9 +24,10 @@ public class ErrorMessageFactory {
 
     }
 
+    @SuppressLint("LogNotTimber")
     public static String create(Context context, Exception exception) {
         if (!TextUtils.isEmpty(exception.getMessage())) {
-            Timber.e(exception.getMessage());
+            Log.e("1", exception.getMessage());
         }
 
         String message = context.getString(R.string.exception_message_genric);

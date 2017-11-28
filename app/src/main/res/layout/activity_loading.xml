@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_loading"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/buy_sell_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="40dp"
+        android:background="@android:color/transparent"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/to_buy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_loading_buy" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/to_sell"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_loading_sell" />
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/buy_sell_layout"
+        android:layout_centerHorizontal="true">
+
+        <ImageView
+            android:id="@+id/hezi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center_horizontal"
+            android:layout_marginBottom="10dp"
+            android:src="@drawable/ic_loading_box"
+            android:visibility="invisible" />
+
+        <ImageView
+            android:id="@+id/to_home"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top|end"
+            android:layout_marginTop="25dp"
+            android:src="@drawable/ic_loading_enter_home" />
+
+
+        <LinearLayout
+            android:id="@+id/float1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginRight="30dp"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/ic_loading_float1"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:visibility="invisible">
+
+            <com.tsy.base.widget.CircleImageView
+                android:id="@+id/float1_img"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="-5dp"
+                app:border_color="@android:color/transparent"
+                app:border_width="0dp" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/float2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginRight="90dp"
+            android:layout_marginTop="120dp"
+            android:background="@drawable/ic_loading_float2"
+            android:gravity="center"
+            android:paddingBottom="3dp"
+            android:paddingRight="3dp"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:visibility="invisible"
+            tools:text="王者\n荣耀" />
+
+        <LinearLayout
+            android:id="@+id/float3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_marginRight="30dp"
+            android:layout_marginTop="100dp"
+            android:background="@drawable/ic_loading_float3"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:visibility="invisible">
+
+            <com.tsy.base.widget.CircleImageView
+                android:id="@+id/float3_img"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_gravity="center"
+                android:layout_marginBottom="1.3dp"
+                android:layout_marginRight="1.5dp"
+                app:border_color="@android:color/transparent"
+                app:border_width="0dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/float4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="200dp"
+            android:background="@drawable/ic_loading"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:visibility="invisible">
+
+            <com.tsy.base.widget.CircleImageView
+                android:id="@+id/float4_img"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_gravity="center"
+                android:layout_marginBottom="1.3dp"
+                android:layout_marginRight="1.5dp"
+                app:border_color="@android:color/transparent"
+                app:border_width="0dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/float5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="180dp"
+            android:background="@drawable/ic_loading_float5"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:visibility="invisible">
+
+            <com.tsy.base.widget.CircleImageView
+                android:id="@+id/float5_img"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_gravity="center"
+                android:layout_marginRight="3dp"
+                android:layout_marginTop="-4dp"
+                app:border_color="@android:color/transparent"
+                app:border_width="0dp" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/float6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_marginRight="50dp"
+            android:layout_marginTop="220dp"
+            android:background="@drawable/ic_loading_float6"
+            android:gravity="center"
+            android:paddingBottom="3dp"
+            android:paddingRight="1dp"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:visibility="invisible"
+            tools:text="大话\n西游" />
+
+        <TextView
+            android:id="@+id/float7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginRight="50dp"
+            android:layout_marginTop="280dp"
+            android:background="@drawable/ic_loading_float7"
+            android:gravity="center"
+            android:paddingBottom="3dp"
+            android:paddingRight="1dp"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:visibility="invisible"
+            tools:text="梦幻\n西游" />
+
+        <LinearLayout
+            android:id="@+id/float8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="320dp"
+            android:background="@drawable/ic_loading_float8"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:textStyle="bold"
+            android:visibility="invisible">
+
+            <com.tsy.base.widget.CircleImageView
+                android:id="@+id/float8_img"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_gravity="center"
+                android:layout_marginBottom="1.3dp"
+                android:layout_marginRight="1.5dp"
+                app:border_color="@android:color/transparent"
+                app:border_width="0dp" />
+
+        </LinearLayout>
+
+    </FrameLayout>
+
+
+</RelativeLayout>

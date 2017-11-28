@@ -2,7 +2,7 @@ ext.deps = [:]
 def versions = [:]
 versions.support = "26.1.0"
 versions.constraint_ayout = "1.0.2"
-versions.android_gradle_plugin = "3.0.0"
+versions.android_gradle_plugin = "3.0.1"
 versions.junit = "4.12"
 versions.okhttp = "3.9.0"
 versions.retrofit = "2.3.0"
@@ -14,11 +14,11 @@ versions.timber = "4.6.0"
 versions.kotlin = "1.1.51"
 versions.statusbar = "1.4.0"
 versions.swipebacklayout = "1.1.6"
-versions.rxlifecycle = "2.2.0"
+versions.rxlifecycle = "2.2.1"
 versions.multidex = "1.0.2"
 versions.fragmentation = "1.1.8"
 versions.permissionsdispatcher = "3.0.1"
-versions.anko = "0.10.2"
+versions.butterknife = "8.8.1"
 
 def support = [:]
 support.app_compat = "com.android.support:appcompat-v7:$versions.support"
@@ -47,13 +47,7 @@ deps.kotlin = kotlin
 def rxlifecycle = [:]
 rxlifecycle.runtime = "com.trello.rxlifecycle2:rxlifecycle:$versions.rxlifecycle"
 rxlifecycle.android = "com.trello.rxlifecycle2:rxlifecycle-android:$versions.rxlifecycle"
-rxlifecycle.kotlin = "com.trello.rxlifecycle2:rxlifecycle-kotlin:$versions.rxlifecycle"
-rxlifecycle.android_kotlin = "com.trello.rxlifecycle2:rxlifecycle-android-lifecycle-kotlin:$versions.rxlifecycle"
 deps.rxlifecycle = rxlifecycle
-
-def anko = [:]
-anko.runtime = "org.jetbrains.anko:anko-commons:$versions.anko"
-deps.anko = anko
 
 deps.glide = "com.github.bumptech.glide:glide:$versions.glide"
 deps.timber = "com.jakewharton.timber:timber:$versions.timber"
@@ -68,6 +62,8 @@ deps.fragmentation_core = "me.yokeyword:fragmentation-core:$versions.fragmentati
 deps.fragmentation_swipeback = "me.yokeyword:fragmentation-swipeback:$versions.fragmentation"
 deps.permissionsdispatcher = "com.github.hotchemi:permissionsdispatcher:$versions.permissionsdispatcher"
 deps.permissionsdispatcher_processor = "com.github.hotchemi:permissionsdispatcher-processor:$versions.permissionsdispatcher"
+deps.butterknife = "com.jakewharton:butterknife:$versions.butterknife"
+deps.butterknife_processor = "com.jakewharton:butterknife-compiler:$versions.butterknife"
 deps.android_gradle_plugin = "com.android.tools.build:gradle:$versions.android_gradle_plugin"
 ext.deps = deps
 

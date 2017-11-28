@@ -1,6 +1,4 @@
 apply plugin: 'com.android.application'
-apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
 
 android {
     compileSdkVersion build_versions.target_sdk
@@ -8,8 +6,8 @@ android {
         applicationId "com.tsy.tsy"
         minSdkVersion build_versions.min_sdk
         targetSdkVersion build_versions.target_sdk
-        versionCode 1
-        versionName "1.0"
+        versionCode 223
+        versionName "2.2.3"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary= true
     }
@@ -19,14 +17,16 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
 }
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     testImplementation deps.junit
     implementation project(':base')
-    // kotlin
-    implementation deps.kotlin.stdlib
     // Support libraries
     implementation deps.support.app_compat
     implementation deps.support.v4
@@ -43,7 +43,12 @@ dependencies {
     //permissionsdispatcher
     implementation deps.permissionsdispatcher
     annotationProcessor deps.permissionsdispatcher_processor
-    //anko
-    implementation deps.anko.runtime
-
+    // Timber
+    implementation deps.timber
+    // RxLife
+    implementation deps.rxlifecycle.runtime
+    implementation deps.rxlifecycle.android
+    //butterknife
+    implementation deps.butterknife
+    annotationProcessor deps.butterknife_processor
 }

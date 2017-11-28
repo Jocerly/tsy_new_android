@@ -7,7 +7,6 @@ import java.util.Comparator;
 import java.util.Map;
 import java.util.TreeMap;
 
-import timber.log.Timber;
 
 /**
  * Created by jay on 17/7/31.
@@ -115,8 +114,6 @@ public class RequestSignTool {
         if (buffer.length() > 0) {
             buffer.deleteCharAt(0);
         }
-
-        Timber.d(buffer.toString());
 
         try {
             return ShaTool.getSHA1(new StrMd5(buffer.toString()).getResult());
