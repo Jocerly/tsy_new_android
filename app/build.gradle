@@ -1,15 +1,23 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion build_versions.target_sdk
+    compileSdkVersion 25
+    buildToolsVersion "25.0.2"
     defaultConfig {
         applicationId "com.tsy.tsy"
-        minSdkVersion build_versions.min_sdk
-        targetSdkVersion build_versions.target_sdk
-        versionCode 223
-        versionName "2.2.3"
+        minSdkVersion 16
+        targetSdkVersion 25
+        versionCode 1
+        versionName "v1.0.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-        vectorDrawables.useSupportLibrary= true
+        resConfigs "zh"
+        multiDexEnabled true
+
+        ndk {
+
+            //选择要添加的对应cpu类型的.so库。
+            abiFilters 'armeabi', 'armeabi-v7a', 'armeabi-v8a', 'x86', 'x86_64', 'mips', 'mips64'
+        }
     }
     buildTypes {
         release {
@@ -17,38 +25,19 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
-    }
 }
 
 dependencies {
-    implementation fileTree(include: ['*.jar'], dir: 'libs')
-    testImplementation deps.junit
-    implementation project(':base')
-    // Support libraries
-    implementation deps.support.app_compat
-    implementation deps.support.v4
-    implementation deps.support.design
-    implementation deps.support.constraint_layout
-    implementation deps.support.vector_drawable
-    // swipeBack
-    implementation deps.fragmentation_core
-    implementation deps.fragmentation_swipeback
-    implementation deps.multidex
-    // RxJava
-    implementation deps.rx_android
-    implementation deps.rx_binding2
-    //permissionsdispatcher
-    implementation deps.permissionsdispatcher
-    annotationProcessor deps.permissionsdispatcher_processor
-    // Timber
-    implementation deps.timber
-    // RxLife
-    implementation deps.rxlifecycle.runtime
-    implementation deps.rxlifecycle.android
-    //butterknife
-    implementation deps.butterknife
-    annotationProcessor deps.butterknife_processor
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+
+    compile 'com.android.support:appcompat-v7:25.3.1'
+    compile 'com.android.support.constraint:constraint-layout:1.0.1'
+    compile 'com.android.support:design:25.3.1'
+    testCompile 'junit:junit:4.12'
+    compile 'com.bigkoo:convenientbanner:2.0.5'
+    compile 'com.umeng.analytics:analytics:latest.integration'
+    compile 'com.android.support:multidex:1.0.1'
 }

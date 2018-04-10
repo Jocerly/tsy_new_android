@@ -1,8 +1,0 @@
-<resources>
-    <string name="app_name">base</string>
-
-    <string name="exception_message_genric">未知错误</string>
-    <string name="exception_message_connection">网络不好，请检查你的网络</string>
-    <string name="exception_message_not_found">资源未找到</string>
-
-</resources>
