@@ -6,11 +6,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import org.jocerly.jcannotation.R;
-import org.jocerly.jcannotation.holder.BaseViewHolder;
-import org.jocerly.jcannotation.holder.FooterHolder;
-
 import java.util.List;
+
+import cn.tsy.base.R;
 
 
 /**

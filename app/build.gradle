@@ -76,10 +76,6 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:3.0.1', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    //noinspection GradleCompatible
-    compile "com.android.support:appcompat-v7:$rootProject.ext.suppportLib"
-    compile "com.android.support:design:$rootProject.ext.suppportLib"
-    compile "com.android.support:recyclerview-v7:$rootProject.ext.suppportLib"
     compile "com.android.support.constraint:constraint-layout:$rootProject.ext.constraintLib"
     compile "com.bigkoo:convenientbanner:2.0.5"
     compile "com.umeng.analytics:analytics:latest.integration"
