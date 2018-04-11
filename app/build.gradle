@@ -28,10 +28,45 @@ android {
     }
     buildTypes {
         release {
+            buildConfigField("String", "URL_HOST", "\"http://app.taoshouyou.com/api/\"")
+            buildConfigField("String", "LOGIN_URL_HOST", "\"http://passport.taoshouyou.com/api/\"")
+            buildConfigField("String", "PAY_URL_HOST", "\"http://pay.taoshouyou.com/\"")
+            buildConfigField("String", "URL_IMG_HOST", "\"http://img.taoshouyou.com\"")
+            buildConfigField("String", "H5_HOST", "\"https://m.taoshouyou.com/\"")
+            buildConfigField("String", "OnTag", "\"tsy_online\"")
+
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.release // 签名配置
         }
+
+        debug {
+            buildConfigField("String", "URL_HOST", "\"http://cdt0-openapi.taoshouyou.com/api/\"")
+            buildConfigField("String", "LOGIN_URL_HOST", "\"http://cdt0-passport.taoshouyou.com/api/\"")
+            buildConfigField("String", "PAY_URL_HOST", "\"http://cdt0-pay.taoshouyou.com/\"")
+            buildConfigField("String", "URL_IMG_HOST", "\"http://img-test.taoshouyou.com\"")
+            buildConfigField("String", "H5_HOST", "\"http://cdt0-webapp.taoshouyou.com/\"")
+            buildConfigField("String", "OnTag", "\"tsy_test\"")
+
+            minifyEnabled false
+        }
+    }
+    sourceSets {
+        main {
+            jni.srcDirs = []//设置禁止gradle生成Android.mk
+            jniLibs.srcDirs = ['libs']
+        }
+    }
+    task ndkBuild(type: Exec) {//设置新的so的生成目录
+        commandLine "E:\\Android\\sdk\\ndk-bundle\\ndk-build.cmd",
+                'NDK_PROJECT_PATH=build/intermediates/ndk',
+                'NDK_LIBS_OUT=libs',
+                'APP_BUILD_SCRIPT=jni/Android.mk',
+                'NDK_APPLICATION_MK=jni/Application.mk'
+    }
+
+    tasks.withType(JavaCompile) {
+        compileTask -> compileTask.dependsOn ndkBuild
     }
 }
 
