@@ -15,6 +15,7 @@ import java.io.File;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import cn.tsy.base.uitls.JCLoger;
 
 /**
  * Created by jay on 2017/11/23.
@@ -31,7 +32,6 @@ public class MainActivity extends BaseActivity {
     Button btn4;
     @BindView(R.id.image)
     ImageView mImage;
-
 
     private static final int quality = 20;
 
@@ -104,6 +104,7 @@ public class MainActivity extends BaseActivity {
 
     @OnClick(R.id.btn3)
     public void doBtn3() {//原图
+        JCLoger.debug("原图.....");
         String tempCompressImgPath = mImageRootDir + File.separator + "temp.jpg";
         mImage.setImageBitmap(BitmapFactory
                 .decodeFile(tempCompressImgPath));
@@ -116,6 +117,4 @@ public class MainActivity extends BaseActivity {
         mImage.setImageBitmap(BitmapFactory
                 .decodeFile(afterCompressImgFile.getPath()));
     }
-
-
 }
