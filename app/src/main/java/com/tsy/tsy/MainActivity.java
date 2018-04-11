@@ -4,11 +4,13 @@ import android.os.Bundle;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.tsy.tsy.config.URLConfig;
 import com.tsy.tsy.okhttp.RequestCenter;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import cn.tsy.base.okhttp.DisposeDataListener;
+import cn.tsy.base.okhttp.RequestParams;
 
 /**
  * Created by jay on 2017/11/23.
@@ -27,7 +29,9 @@ public class MainActivity extends BaseActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
-        RequestCenter.postRequest("https://www.baidu.com", null, new DisposeDataListener() {
+        params = new RequestParams();
+        params.put("key", "value");
+        RequestCenter.postRequest(URLConfig.NetConfig.URL_HOST, params, new DisposeDataListener() {
             @Override
             public void onSuccess(Object responseObj) {
 

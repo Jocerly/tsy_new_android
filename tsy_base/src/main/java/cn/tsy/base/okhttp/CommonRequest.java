@@ -3,6 +3,7 @@ package cn.tsy.base.okhttp;
 import java.io.File;
 import java.util.Map;
 
+import cn.tsy.base.uitls.JCLoger;
 import okhttp3.FormBody;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
@@ -34,8 +35,9 @@ public class CommonRequest {
             }
         }
 
-        return new Request.Builder().url(urlBuilder.substring(0, urlBuilder.length() - 1))
-                .get().build();
+        String requestUrl = urlBuilder.substring(0, urlBuilder.length() - 1);
+        JCLoger.debug(requestUrl);
+        return new Request.Builder().url(requestUrl).get().build();
     }
 
     /**
@@ -47,6 +49,7 @@ public class CommonRequest {
      */
     public static Request createPostRequest(String url, RequestParams params) {
         FormBody.Builder mFromBodyBuilder = new FormBody.Builder();
+        JCLoger.debug(url + params.urlParams.toString());
 
         if (params != null) {
             for (Map.Entry<String, String> entry : params.urlParams.entrySet()) {
@@ -62,6 +65,7 @@ public class CommonRequest {
 
     /**
      * 上传文件Request
+     *
      * @param url
      * @param localPath
      * @return
@@ -75,6 +79,7 @@ public class CommonRequest {
 
         final MultipartBody requestBody = builder.build();
         //构建请求
+        JCLoger.debug(url + localPath);
         return new Request.Builder()
                 .url(url)//地址
                 .post(requestBody)//添加请求体
@@ -84,6 +89,7 @@ public class CommonRequest {
 
     /**
      * 上传文件Request
+     *
      * @param url
      * @param file
      * @return
@@ -96,6 +102,7 @@ public class CommonRequest {
 
         final MultipartBody requestBody = builder.build();
         //构建请求
+        JCLoger.debug(url + file.getAbsolutePath());
         return new Request.Builder()
                 .url(url)//地址
                 .post(requestBody)//添加请求体
