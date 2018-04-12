@@ -60,18 +60,17 @@ android {
             jniLibs.srcDirs = ['libs']
         }
     }
-    task ndkBuild(type: Exec) {//设置新的so的生成目录
-        commandLine '/home/dong/Android/Sdk/ndk-bundle/ndk-build',
-        //"E:\\Android\\sdk\\ndk-bundle\\ndk-build.cmd",
-                'NDK_PROJECT_PATH=build/intermediates/ndk',
-                'NDK_LIBS_OUT=libs',
-                'APP_BUILD_SCRIPT=jni/Android.mk',
-                'NDK_APPLICATION_MK=jni/Application.mk'
-    }
+//    task ndkBuild(type: Exec) {//设置新的so的生成目录
+//        commandLine "E:\\Android\\sdk\\ndk-bundle\\ndk-build.cmd",
+//                'NDK_PROJECT_PATH=build/intermediates/ndk',
+//                'NDK_LIBS_OUT=libs',
+//                'APP_BUILD_SCRIPT=jni/Android.mk',
+//                'NDK_APPLICATION_MK=jni/Application.mk'
+//    }
 
-    tasks.withType(JavaCompile) {
-        compileTask -> compileTask.dependsOn ndkBuild
-    }
+//    tasks.withType(JavaCompile) {
+//        compileTask -> compileTask.dependsOn ndkBuild
+//    }
 }
 
 dependencies {
