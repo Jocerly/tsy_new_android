@@ -27,6 +27,7 @@ import java.lang.reflect.Field;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import cn.tsy.base.uitls.JCLoger;
 
 /**
@@ -93,6 +94,12 @@ public class ScanActivity extends BaseActivity implements SurfaceHolder.Callback
     public void initData() {
         isHasSurface = false;
         beepManager = new BeepManager(this);
+    }
+
+    @OnClick(R.id.textLight)
+    public void doLight(){
+        mCameraManager.switchLight();
+        textLight.setBackgroundResource(mCameraManager.getIsOpenLight() ? R.mipmap.light : R.mipmap.light_not);
     }
 
     @Override
