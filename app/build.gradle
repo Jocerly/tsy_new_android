@@ -3,14 +3,15 @@ apply plugin: 'com.android.application'
 apply plugin: 'com.jakewharton.butterknife'
 
 android {
-    compileSdkVersion 26
-    buildToolsVersion "26.0.2"
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
+
     defaultConfig {
         applicationId "com.tsy.tsy"
-        minSdkVersion 16
-        targetSdkVersion 26
-        versionCode 1
-        versionName "v1.0.0"
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        versionCode rootProject.ext.versionCode
+        versionName rootProject.ext.versionName
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         resConfigs "zh"
         multiDexEnabled true
@@ -60,7 +61,8 @@ android {
         }
     }
     task ndkBuild(type: Exec) {//设置新的so的生成目录
-        commandLine "E:\\Android\\sdk\\ndk-bundle\\ndk-build.cmd",
+        commandLine '/home/dong/Android/Sdk/ndk-bundle/ndk-build',
+        //"E:\\Android\\sdk\\ndk-bundle\\ndk-build.cmd",
                 'NDK_PROJECT_PATH=build/intermediates/ndk',
                 'NDK_LIBS_OUT=libs',
                 'APP_BUILD_SCRIPT=jni/Android.mk',
@@ -75,6 +77,7 @@ android {
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     compile project(':tsy_base')
+    compile project(':picture_lib')
     androidTestCompile('com.android.support.test.espresso:espresso-core:3.0.1', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })

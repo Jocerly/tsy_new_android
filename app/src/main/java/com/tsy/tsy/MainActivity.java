@@ -1,5 +1,6 @@
 package com.tsy.tsy;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -8,9 +9,14 @@ import android.util.Log;
 import android.widget.Button;
 import android.widget.ImageView;
 
+import com.luck.picture.lib.PictureSelector;
+import com.luck.picture.lib.config.PictureConfig;
+import com.luck.picture.lib.config.PictureMimeType;
+import com.luck.picture.lib.entity.LocalMedia;
 import com.tsy.tsy.uitls.ImageUtils;
 
 import java.io.File;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -116,5 +122,40 @@ public class MainActivity extends BaseActivity {
                 + "/终极压缩666.jpg");
         mImage.setImageBitmap(BitmapFactory
                 .decodeFile(afterCompressImgFile.getPath()));
+    }
+
+    private List<LocalMedia> mLocalMedia;
+
+    @OnClick(R.id.selectPic)
+    public void onViewClicked() {
+        PictureSelector.create(this)
+                .openGallery(PictureMimeType.ofImage())
+                .maxSelectNum(3)
+                .imageSpanCount(4)
+                .previewImage(false)
+                .isCamera(false)
+                .isZoomAnim(false)
+                .enableCrop(false)
+                .compress(false)
+                .glideOverride(160, 160)
+                .isGif(false)
+                .selectionMedia(mLocalMedia)
+                .forResult(PictureConfig.CHOOSE_REQUEST);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK) {
+            switch (requestCode) {
+                case PictureConfig.CHOOSE_REQUEST:
+                    // 图片选择结果回调
+                    mLocalMedia = PictureSelector.obtainMultipleResult(data);
+                    for (LocalMedia media : mLocalMedia) {
+                        Log.d("图片-----》", media.getPath());
+                    }
+                    break;
+            }
+        }
     }
 }
