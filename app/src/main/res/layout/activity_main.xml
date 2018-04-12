@@ -38,6 +38,13 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/compress_btn"
             android:text="压缩后" />
+
+        <Button
+            android:id="@+id/btn5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/compress_btn"
+            android:text="扫码" />
     </LinearLayout>
 
     <ImageView

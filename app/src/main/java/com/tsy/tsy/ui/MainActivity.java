@@ -1,4 +1,4 @@
-package com.tsy.tsy;
+package com.tsy.tsy.ui;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -8,6 +8,8 @@ import android.util.Log;
 import android.widget.Button;
 import android.widget.ImageView;
 
+import com.tsy.tsy.BaseActivity;
+import com.tsy.tsy.R;
 import com.tsy.tsy.uitls.ImageUtils;
 
 import java.io.File;
@@ -34,11 +36,15 @@ public class MainActivity extends BaseActivity {
     ImageView mImage;
 
     private static final int quality = 20;
+    private static final int ZBAR_SCANNER_REQUEST = 0;
+    private static final int ZBAR_QR_SCANNER_REQUEST = 1;
 
     /**
      * 图片存放根目录
      */
     private final String mImageRootDir = Environment.getExternalStorageDirectory().getPath() + "/jpeg_picture/";
+    @BindView(R.id.btn5)
+    Button btn5;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -116,5 +122,20 @@ public class MainActivity extends BaseActivity {
                 + "/终极压缩666.jpg");
         mImage.setImageBitmap(BitmapFactory
                 .decodeFile(afterCompressImgFile.getPath()));
+    }
+
+    @OnClick(R.id.btn5)
+    public void doBtn5() {//扫码
+        showActivity(aty, ScanActivity.class);
+    }
+
+    @Override
+    public void initView() {
+
+    }
+
+    @Override
+    public void initData() {
+
     }
 }

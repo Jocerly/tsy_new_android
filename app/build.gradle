@@ -4,7 +4,7 @@ apply plugin: 'com.jakewharton.butterknife'
 
 android {
     compileSdkVersion 26
-    buildToolsVersion "26.0.2"
+    buildToolsVersion '26.0.2'
     defaultConfig {
         applicationId "com.tsy.tsy"
         minSdkVersion 16
@@ -59,17 +59,17 @@ android {
             jniLibs.srcDirs = ['libs']
         }
     }
-    task ndkBuild(type: Exec) {//设置新的so的生成目录
-        commandLine "E:\\Android\\sdk\\ndk-bundle\\ndk-build.cmd",
-                'NDK_PROJECT_PATH=build/intermediates/ndk',
-                'NDK_LIBS_OUT=libs',
-                'APP_BUILD_SCRIPT=jni/Android.mk',
-                'NDK_APPLICATION_MK=jni/Application.mk'
-    }
+//    task ndkBuild(type: Exec) {//设置新的so的生成目录
+//        commandLine "E:\\Android\\sdk\\ndk-bundle\\ndk-build.cmd",
+//                'NDK_PROJECT_PATH=build/intermediates/ndk',
+//                'NDK_LIBS_OUT=libs',
+//                'APP_BUILD_SCRIPT=jni/Android.mk',
+//                'NDK_APPLICATION_MK=jni/Application.mk'
+//    }
 
-    tasks.withType(JavaCompile) {
-        compileTask -> compileTask.dependsOn ndkBuild
-    }
+//    tasks.withType(JavaCompile) {
+//        compileTask -> compileTask.dependsOn ndkBuild
+//    }
 }
 
 dependencies {
@@ -79,11 +79,12 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     compile "com.android.support.constraint:constraint-layout:$rootProject.ext.constraintLib"
-    compile "com.bigkoo:convenientbanner:2.0.5"
-    compile "com.umeng.analytics:analytics:latest.integration"
-    compile "com.android.support:multidex:1.0.1"
+    compile 'com.bigkoo:convenientbanner:2.0.5'
+    compile 'com.umeng.analytics:analytics:latest.integration'
+    compile 'com.android.support:multidex:1.0.1'
     compile 'com.jakewharton:butterknife:8.5.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.5.1'
+    compile files('libs/ZBarDecoder.jar')
 }
 repositories {
     mavenCentral()
