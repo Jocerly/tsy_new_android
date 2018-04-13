@@ -64,6 +64,12 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/compress_btn"
             android:text="扫码" />
+
+        <Button
+            android:id="@+id/btnFile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="下载文件" />
     </LinearLayout>
 
     <cn.tsy.base.views.NumberProgressBar

@@ -21,11 +21,9 @@ public class CommonJsonStringCallback implements Callback {
 
     private Handler mDeliveryHandler; //进行消息的转发
     private DisposeDataListener mListener;
-    private Class<?> mClass;
 
     public CommonJsonStringCallback(DisposeDataHandle handle) {
         this.mListener = handle.mListener;
-        this.mClass = handle.mClass;
         this.mDeliveryHandler = new Handler(Looper.getMainLooper());
     }
 

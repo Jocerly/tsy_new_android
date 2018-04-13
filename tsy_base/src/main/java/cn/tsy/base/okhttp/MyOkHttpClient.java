@@ -42,6 +42,7 @@ public class MyOkHttpClient {
 
     /**
      * 发送具体的HTTP以及Https请求
+     *
      * @param request
      * @param commonCallback
      * @return
@@ -54,6 +55,7 @@ public class MyOkHttpClient {
 
     /**
      * 发送具体的HTTP以及Https请求
+     *
      * @param request
      * @param jsonStringCallback
      * @return
@@ -65,7 +67,23 @@ public class MyOkHttpClient {
     }
 
     /**
+     * 发送下载文件具体的HTTP以及Https请求
+     *
+     * @param request
+     * @param handle
+     * @param url
+     * @param dirPath
+     * @return
+     */
+    public static Call sendDownloadRequest(Request request, DisposeDownloadHandle handle, String url, String dirPath) {
+        Call call = mOkHttpClient.newCall(request);
+        call.enqueue(new CommonDownloadCallback(handle, url, dirPath));
+        return call;
+    }
+
+    /**
      * GET请求
+     *
      * @param request
      * @param handle
      * @return
@@ -78,6 +96,7 @@ public class MyOkHttpClient {
 
     /**
      * POST请求
+     *
      * @param request
      * @param handle
      * @return

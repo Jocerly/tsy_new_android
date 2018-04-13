@@ -65,6 +65,16 @@ public class ScanActivity extends BaseActivity implements SurfaceHolder.Callback
     private Thread thread = null;
 
     @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_scan);
+        ButterKnife.bind(this);
+
+        initView();
+        initData();
+    }
+
+    @Override
     protected void onPause() {
         super.onPause();
         MobclickAgent.onPageEnd("扫描商品条码");
@@ -77,9 +87,6 @@ public class ScanActivity extends BaseActivity implements SurfaceHolder.Callback
 
     @Override
     public void initView() {
-        setContentView(R.layout.activity_scan);
-        ButterKnife.bind(this);
-
         Window window = getWindow();
         window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE | WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
         window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);

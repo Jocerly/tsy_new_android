@@ -109,4 +109,15 @@ public class CommonRequest {
                 .build();
 
     }
+
+    /**
+     * 创建下载文件请求的Request
+     *
+     * @param url
+     * @return 通过传入的参数返回一个请求
+     */
+    public static Request downloadFileRequest(String url) {
+        JCLoger.debug(url);
+        return new Request.Builder().url(url).get().build();
+    }
 }

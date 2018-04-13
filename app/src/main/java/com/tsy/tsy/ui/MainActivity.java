@@ -15,17 +15,17 @@ import com.luck.picture.lib.config.PictureMimeType;
 import com.luck.picture.lib.entity.LocalMedia;
 import com.tsy.tsy.BaseActivity;
 import com.tsy.tsy.R;
+import com.tsy.tsy.okhttp.RequestCenter;
 import com.tsy.tsy.uitls.ImageUtils;
 
 import java.io.File;
 import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.tsy.base.listener.OnProgressBarListener;
+import cn.tsy.base.okhttp.DisposeDownlaodListener;
 import cn.tsy.base.uitls.JCLoger;
 import cn.tsy.base.views.NumberProgressBar;
 import cn.tsy.base.views.SwitchButton;
@@ -62,9 +62,19 @@ public class MainActivity extends BaseActivity {
      * 图片存放根目录
      */
     private final String mImageRootDir = Environment.getExternalStorageDirectory().getPath() + "/jpeg_picture/";
+    @BindView(R.id.btnFile)
+    Button btnFile;
 
-    private Timer timer;
     private List<LocalMedia> mLocalMedia;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        ButterKnife.bind(this);
+        initView();
+        initData();
+    }
 
     @OnClick(R.id.btn1)
     public void doBtn1() {//尺寸 质量 libjpeg结合压缩
@@ -136,11 +146,29 @@ public class MainActivity extends BaseActivity {
         showActivity(aty, ScanActivity.class);
     }
 
+    @OnClick(R.id.btnFile)
+    public void downloadFile() {
+        RequestCenter.downloadFileRequest("http://img.zcool.cn/community/010f87596f13e6a8012193a363df45.jpg@1280w_1l_2o_100sh.jpg",
+                mImageRootDir, new DisposeDownlaodListener() {
+                    @Override
+                    public void onDownloadSuccess(String path) {
+                        JCLoger.debug(path);
+                    }
+
+                    @Override
+                    public void onDownloading(int progress) {
+                        numberProgressBar.setProgress(progress);
+                    }
+
+                    @Override
+                    public void onDownloadFailed(Object responseObj) {
+                        JCLoger.debug(responseObj.toString());
+                    }
+                });
+    }
+
     @Override
     public void initView() {
-        setContentView(R.layout.activity_main);
-        ButterKnife.bind(this);
-
         // 压缩后保存临时文件目录
         File tempFile = new File(mImageRootDir);
         if (!tempFile.exists()) {
@@ -157,7 +185,7 @@ public class MainActivity extends BaseActivity {
             @Override
             public void onProgressChange(int current, int max) {
                 if (max == current) {
-                    numberProgressBar.setProgress(0);
+                    toast("下载完成");
                 }
             }
         });
@@ -166,27 +194,11 @@ public class MainActivity extends BaseActivity {
     @Override
     public void initData() {
         switchButton.setChecked(true);
-        timer = new Timer();
-        timer.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        numberProgressBar.incrementProgressBy(1);
-                    }
-                });
-            }
-        }, 1000, 100);
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if (timer != null) {
-            timer.cancel();
-            timer = null;
-        }
     }
 
     @OnClick(R.id.selectPic)
@@ -222,10 +234,4 @@ public class MainActivity extends BaseActivity {
         }
     }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
-    }
 }

@@ -31,8 +31,6 @@ public abstract class BaseActivity extends AppCompatActivity implements I_JCActi
         super.onCreate(savedInstanceState);
         JCActivityStack.create().addActivity(this);
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
-        initView();
-        initData();
     }
 
     @Override

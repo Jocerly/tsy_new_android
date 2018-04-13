@@ -6,6 +6,8 @@ import cn.tsy.base.okhttp.CommonJsonStringCallback;
 import cn.tsy.base.okhttp.CommonRequest;
 import cn.tsy.base.okhttp.DisposeDataHandle;
 import cn.tsy.base.okhttp.DisposeDataListener;
+import cn.tsy.base.okhttp.DisposeDownlaodListener;
+import cn.tsy.base.okhttp.DisposeDownloadHandle;
 import cn.tsy.base.okhttp.MyOkHttpClient;
 import cn.tsy.base.okhttp.RequestParams;
 
@@ -29,6 +31,7 @@ public class RequestCenter {
 
     /**
      * 根据参数发送所有的post请求
+     *
      * @param url
      * @param params
      * @param listener
@@ -40,6 +43,7 @@ public class RequestCenter {
 
     /**
      * 直接发送请求
+     *
      * @param url
      * @param params
      * @param listener
@@ -51,6 +55,7 @@ public class RequestCenter {
 
     /**
      * 上传文件发送请求
+     *
      * @param url
      * @param localPath
      * @param listener
@@ -62,6 +67,7 @@ public class RequestCenter {
 
     /**
      * 上传文件发送请求
+     *
      * @param url
      * @param file
      * @param listener
@@ -69,5 +75,15 @@ public class RequestCenter {
      */
     public static void uploadFileRequest(String url, File file, DisposeDataListener listener, Class<?> clazz) {
         MyOkHttpClient.sendRequest(CommonRequest.uploadFileRequest(url, file), new CommonJsonStringCallback(new DisposeDataHandle(listener, clazz)));
+    }
+
+    /**
+     * 下载文件发送请求
+     *
+     * @param url
+     * @param listener
+     */
+    public static void downloadFileRequest(String url, String dirPath, DisposeDownlaodListener listener) {
+        MyOkHttpClient.sendDownloadRequest(CommonRequest.downloadFileRequest(url), new DisposeDownloadHandle(listener), url, dirPath);
     }
 }
