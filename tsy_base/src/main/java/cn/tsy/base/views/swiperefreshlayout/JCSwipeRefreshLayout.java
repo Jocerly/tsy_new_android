@@ -53,7 +53,7 @@ import android.widget.Toast;
  * also be made the target of the gesture and will be forced to match both the
  * width and the height supplied in this layout. The SwipeRefreshLayout does not
  * provide accessibility events; instead, a menu item must be provided to allow
- * refresh of the content wherever this gesture is used.
+ * refresh of the content wherever this gesture is used..
  * </p>
  */
 public class JCSwipeRefreshLayout extends ViewGroup implements NestedScrollingParent, NestedScrollingChild {
@@ -185,8 +185,6 @@ public class JCSwipeRefreshLayout extends ViewGroup implements NestedScrollingPa
             }
         }
     };
-    private Toast mToast;
-
     void reset() {
         mCircleView.clearAnimation();
         mProgress.stop();
