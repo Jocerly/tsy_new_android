@@ -18,7 +18,7 @@ android {
 
         ndk {
             //选择要添加的对应cpu类型的.so库。
-            abiFilters 'armeabi-v7a'
+            abiFilters 'armeabi'
         }
     }
     signingConfigs {
@@ -67,7 +67,7 @@ android {
 //                'APP_BUILD_SCRIPT=jni/Android.mk',
 //                'NDK_APPLICATION_MK=jni/Application.mk'
 //    }
-
+//
 //    tasks.withType(JavaCompile) {
 //        compileTask -> compileTask.dependsOn ndkBuild
 //    }

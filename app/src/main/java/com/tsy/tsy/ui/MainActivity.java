@@ -19,11 +19,16 @@ import com.tsy.tsy.uitls.ImageUtils;
 
 import java.io.File;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import cn.tsy.base.listener.OnProgressBarListener;
 import cn.tsy.base.uitls.JCLoger;
+import cn.tsy.base.views.NumberProgressBar;
+import cn.tsy.base.views.SwitchButton;
 
 /**
  * Created by jay on 2017/11/23.
@@ -40,6 +45,14 @@ public class MainActivity extends BaseActivity {
     Button btn4;
     @BindView(R.id.image)
     ImageView mImage;
+    @BindView(R.id.btn5)
+    Button btn5;
+    @BindView(R.id.switchButton)
+    SwitchButton switchButton;
+    @BindView(R.id.selectPic)
+    Button selectPic;
+    @BindView(R.id.number_progress_bar)
+    NumberProgressBar numberProgressBar;
 
     private static final int quality = 20;
     private static final int ZBAR_SCANNER_REQUEST = 0;
@@ -49,21 +62,9 @@ public class MainActivity extends BaseActivity {
      * 图片存放根目录
      */
     private final String mImageRootDir = Environment.getExternalStorageDirectory().getPath() + "/jpeg_picture/";
-    @BindView(R.id.btn5)
-    Button btn5;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        ButterKnife.bind(this);
-
-        // 压缩后保存临时文件目录
-        File tempFile = new File(mImageRootDir);
-        if (!tempFile.exists()) {
-            tempFile.mkdirs();
-        }
-    }
+    private Timer timer;
+    private List<LocalMedia> mLocalMedia;
 
     @OnClick(R.id.btn1)
     public void doBtn1() {//尺寸 质量 libjpeg结合压缩
@@ -137,15 +138,56 @@ public class MainActivity extends BaseActivity {
 
     @Override
     public void initView() {
+        setContentView(R.layout.activity_main);
+        ButterKnife.bind(this);
 
+        // 压缩后保存临时文件目录
+        File tempFile = new File(mImageRootDir);
+        if (!tempFile.exists()) {
+            tempFile.mkdirs();
+        }
+
+        switchButton.setOnCheckedChangeListener(new SwitchButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(SwitchButton view, boolean isChecked) {
+                JCLoger.debug(String.valueOf(isChecked));
+            }
+        });
+        numberProgressBar.setOnProgressBarListener(new OnProgressBarListener() {
+            @Override
+            public void onProgressChange(int current, int max) {
+                if (max == current) {
+                    numberProgressBar.setProgress(0);
+                }
+            }
+        });
     }
 
     @Override
     public void initData() {
-
+        switchButton.setChecked(true);
+        timer = new Timer();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        numberProgressBar.incrementProgressBy(1);
+                    }
+                });
+            }
+        }, 1000, 100);
     }
 
-    private List<LocalMedia> mLocalMedia;
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (timer != null) {
+            timer.cancel();
+            timer = null;
+        }
+    }
 
     @OnClick(R.id.selectPic)
     public void onViewClicked() {
@@ -178,5 +220,12 @@ public class MainActivity extends BaseActivity {
                     break;
             }
         }
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // TODO: add setContentView(...) invocation
+        ButterKnife.bind(this);
     }
 }

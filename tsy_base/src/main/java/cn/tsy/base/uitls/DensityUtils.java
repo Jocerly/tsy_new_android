@@ -50,8 +50,7 @@ public final class DensityUtils {
      */
     public static int dp2px(Context context, float dpValue) {
         Resources r = context.getResources();
-        float px = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
-                dpValue, r.getDisplayMetrics());
+        float px = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dpValue, r.getDisplayMetrics());
         return (int) px;
     }
 
