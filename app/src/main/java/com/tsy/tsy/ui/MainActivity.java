@@ -24,7 +24,6 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import cn.tsy.base.listener.OnProgressBarListener;
 import cn.tsy.base.okhttp.DisposeDownlaodListener;
 import cn.tsy.base.uitls.JCLoger;
 import cn.tsy.base.views.NumberProgressBar;
@@ -153,6 +152,7 @@ public class MainActivity extends BaseActivity {
                     @Override
                     public void onDownloadSuccess(String path) {
                         JCLoger.debug(path);
+                        toast("下载完成，文件：" + path);
                     }
 
                     @Override
@@ -181,14 +181,14 @@ public class MainActivity extends BaseActivity {
                 JCLoger.debug(String.valueOf(isChecked));
             }
         });
-        numberProgressBar.setOnProgressBarListener(new OnProgressBarListener() {
-            @Override
-            public void onProgressChange(int current, int max) {
-                if (max == current) {
-                    toast("下载完成");
-                }
-            }
-        });
+//        numberProgressBar.setOnProgressBarListener(new OnProgressBarListener() {
+//            @Override
+//            public void onProgressChange(int current, int max) {
+//                if (max == current) {
+//                    toast("下载完成");
+//                }
+//            }
+//        });
     }
 
     @Override

@@ -6,9 +6,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.WindowManager;
+
+import com.zhy.autolayout.AutoLayoutActivity;
 
 import cn.tsy.base.okhttp.RequestParams;
 import cn.tsy.base.ui.I_JCActivity;
@@ -20,7 +21,7 @@ import cn.tsy.base.uitls.JCLoger;
  * 基类，所以activity都需要继承该类
  * Created by Jocerly on 2018/4/10.
  */
-public abstract class BaseActivity extends AppCompatActivity implements I_JCActivity {
+public abstract class BaseActivity extends AutoLayoutActivity implements I_JCActivity {
     public Activity aty;
     protected RequestParams params = null;
     protected Fragment currentFragment;
