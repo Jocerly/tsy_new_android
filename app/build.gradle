@@ -29,6 +29,9 @@ android {
             keyPassword "TSY@2015"
         }
     }
+    lintOptions {
+        checkReleaseBuilds false
+    }
     buildTypes {
         release {
             buildConfigField("String", "URL_HOST", "\"http://app.taoshouyou.com/api/\"")
@@ -39,6 +42,7 @@ android {
             buildConfigField("String", "OnTag", "\"tsy_online\"")
 
             minifyEnabled true
+            shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.release // 签名配置
         }
@@ -75,17 +79,16 @@ android {
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile project(':tsy_base')
-    compile project(':picture_lib')
+    annotationProcessor "com.github.mzule.activityrouter:compiler:$rootProject.annotationProcessor"
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.5.1'
     androidTestCompile('com.android.support.test.espresso:espresso-core:3.0.1', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile "com.android.support.constraint:constraint-layout:$rootProject.ext.constraintLib"
-    compile "com.bigkoo:convenientbanner:2.0.5"
-    compile "com.umeng.analytics:analytics:latest.integration"
-    compile "com.android.support:multidex:1.0.1"
-    compile 'com.jakewharton:butterknife:8.5.1'
-    annotationProcessor 'com.jakewharton:butterknife-compiler:8.5.1'
+    compile project(':picture_lib')
+    //组件化切换
+    if (isModule.toBoolean()) {
+    } else {
+    }
 }
 repositories {
     mavenCentral()

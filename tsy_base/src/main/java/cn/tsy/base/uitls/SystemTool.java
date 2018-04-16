@@ -62,8 +62,22 @@ public final class SystemTool {
     /**
      * 返回当前系统时间(格式以HH:mm形式)
      */
-    public static String getDataTime() {
+    public static String getTime() {
         return getDataTime("HH:mm");
+    }
+
+    /**
+     * 返回当前系统时间(格式以yyyy-MM-dd形式)
+     */
+    public static String getDate() {
+        return getDataTime("yyyy-MM-dd");
+    }
+
+    /**
+     * 返回当前系统时间(格式以yyyy-MM-dd HH:mm:ss形式)
+     */
+    public static String getDateTime() {
+        return getDataTime("yyyy-MM-dd HH:mm:ss");
     }
 
     /**

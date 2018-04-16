@@ -15,6 +15,7 @@ import com.luck.picture.lib.config.PictureMimeType;
 import com.luck.picture.lib.entity.LocalMedia;
 import com.tsy.tsy.BaseActivity;
 import com.tsy.tsy.R;
+import com.tsy.tsy.config.URLConfig;
 import com.tsy.tsy.okhttp.RequestCenter;
 import com.tsy.tsy.uitls.ImageUtils;
 
@@ -71,8 +72,38 @@ public class MainActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+        JCLoger.debug(URLConfig.NetConfig.URL_HOST+"------"+URLConfig.NetConfig.OnTag);
         initView();
         initData();
+    }
+
+    @Override
+    public void initView() {
+        // 压缩后保存临时文件目录
+        File tempFile = new File(mImageRootDir);
+        if (!tempFile.exists()) {
+            tempFile.mkdirs();
+        }
+
+        switchButton.setOnCheckedChangeListener(new SwitchButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(SwitchButton view, boolean isChecked) {
+                JCLoger.debug(String.valueOf(isChecked));
+            }
+        });
+//        numberProgressBar.setOnProgressBarListener(new OnProgressBarListener() {
+//            @Override
+//            public void onProgressChange(int current, int max) {
+//                if (max == current) {
+//                    toast("下载完成");
+//                }
+//            }
+//        });
+    }
+
+    @Override
+    public void initData() {
+        switchButton.setChecked(true);
     }
 
     @OnClick(R.id.btn1)
@@ -165,35 +196,6 @@ public class MainActivity extends BaseActivity {
                         JCLoger.debug(responseObj.toString());
                     }
                 });
-    }
-
-    @Override
-    public void initView() {
-        // 压缩后保存临时文件目录
-        File tempFile = new File(mImageRootDir);
-        if (!tempFile.exists()) {
-            tempFile.mkdirs();
-        }
-
-        switchButton.setOnCheckedChangeListener(new SwitchButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(SwitchButton view, boolean isChecked) {
-                JCLoger.debug(String.valueOf(isChecked));
-            }
-        });
-//        numberProgressBar.setOnProgressBarListener(new OnProgressBarListener() {
-//            @Override
-//            public void onProgressChange(int current, int max) {
-//                if (max == current) {
-//                    toast("下载完成");
-//                }
-//            }
-//        });
-    }
-
-    @Override
-    public void initData() {
-        switchButton.setChecked(true);
     }
 
     @Override
