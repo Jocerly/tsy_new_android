@@ -4,84 +4,42 @@
     android:orientation="vertical">
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/btn1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="先尺寸质量再libjpeg压缩" />
-
-        <Button
-            android:id="@+id/btn2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="终极压缩" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_vertical"
-        android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/btn3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="原图" />
-
-        <Button
-            android:id="@+id/btn4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/compress_btn"
-            android:text="压缩后" />
-
-        <cn.tsy.base.views.SwitchButton
-            android:id="@+id/switchButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/selectPic"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="选择图片" />
-
-        <Button
-            android:id="@+id/btn5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/compress_btn"
-            android:text="扫码" />
-
-        <Button
-            android:id="@+id/btnFile"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="下载文件" />
-    </LinearLayout>
-
-    <cn.tsy.base.views.NumberProgressBar
-        android:id="@+id/number_progress_bar"
-        style="@style/NumberProgressBar_Default" />
-
-    <ImageView
-        android:id="@+id/image"
+        android:id="@+id/llFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="@dimen/px20"
-        android:contentDescription="@null"
-        android:scaleType="centerInside" />
+        android:layout_weight="1">
 
+    </LinearLayout>
+
+    <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/px150"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/rbHome"
+            style="@style/mainRadioButton"
+            android:checked="true"
+            android:drawableTop="@drawable/rb_main_home_draw"
+            android:text="@string/str_main_page" />
+
+        <RadioButton
+            android:id="@+id/rbBuy"
+            style="@style/mainRadioButton"
+            android:drawableTop="@drawable/rb_main_buy_draw"
+            android:text="@string/str_buy" />
+
+        <RadioButton
+            android:id="@+id/rbPublish"
+            style="@style/mainRadioButton"
+            android:drawableTop="@drawable/rb_main_publish_draw"
+            android:text="@string/str_publish" />
+
+        <RadioButton
+            android:id="@+id/rbMine"
+            style="@style/mainRadioButton"
+            android:drawableTop="@drawable/rb_main_mine_draw"
+            android:text="@string/str_mine" />
+
+    </RadioGroup>
 </LinearLayout>

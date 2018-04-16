@@ -79,16 +79,16 @@ android {
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
-    annotationProcessor "com.github.mzule.activityrouter:compiler:$rootProject.annotationProcessor"
+//    annotationProcessor "com.github.mzule.activityrouter:compiler:$rootProject.annotationProcessor"
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.5.1'
     androidTestCompile('com.android.support.test.espresso:espresso-core:3.0.1', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     compile project(':lib_picture')
     //组件化切换
-    if (isModule.toBoolean()) {
-    } else {
-    }
+//    if (isModule.toBoolean()) {
+//    } else {
+//    }
 }
 repositories {
     mavenCentral()

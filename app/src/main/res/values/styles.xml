@@ -1,24 +1,32 @@
 <resources>
-    <style name="AppTheme" parent="Base.Theme.AppCompat.Light.DarkActionBar">
 
-
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorPrimary">@color/title_bar_bg</item>
+        <item name="colorPrimaryDark">@color/title_bar_bg</item>
+        <item name="colorAccent">@color/favorite_nums_text</item>
     </style>
 
     <style name="AppTheme.NoActionBar" parent="Base.Theme.AppCompat.Light">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorPrimary">@color/title_bar_bg</item>
+        <item name="colorPrimaryDark">@color/title_bar_bg</item>
+        <item name="colorAccent">@color/favorite_nums_text</item>
     </style>
 
     <style name="AppTheme.AppBarOverlay" parent="Base.ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="AppTheme.PopupOverlay" parent="Base.ThemeOverlay.AppCompat.Light" />
+
+    <style name="mainRadioButton">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:button">@null</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@drawable/rb_main_tv_cor</item>
+    </style>
 
 </resources>
 

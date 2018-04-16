@@ -1,9 +1,194 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
 
-    <color name="white">#FFFFFF</color>
+    <color name="top_bar_bg">#e14104</color>
+    <color name="title_bar_bg">#ffe14104</color>
+    <color name="title_bar_text">#ffffffff</color>
+
+    <color name="window_background">#f2f2f2</color>
+    <color name="light_red_color">#e34e15</color>
+    <color name="light_black_adadad">#adadad</color>
+
+    <color name="hint_text_bbbbbb">#bbbbbb</color>
+
+    <color name="white">#fff</color>
+    <color name="separate_line">#E7E4DE</color>
+
+
+    <color name="home_divider">#e7e4df</color>
+    <color name="home_divider_e7e7e7">#e7e7e7</color>
+    <color name="divider_bfbfbf">#bfbfbf</color>
+
+    <color name="orange_text_e14104">#e14104</color>
+    <color name="text_color_e04205">#e04205</color>
+    <color name="text_color_666666">#666666</color>
+    <color name="text_color_999999">#999999</color>
+    <color name="text_color_111111">#111111</color>
+    <color name="text_color_333333">#333333</color>
+    <color name="text_color_555555">#555555</color>
+    <color name="text_color_cccccc">#cccccc</color>
+    <color name="text_color_0007ce">#0007ce</color>
+    <color name="text_color_bbbbbb">#bbbbbb</color>
+    <color name="text_color_777777">#777777</color>
+    <color name="text_color_888888">#888888</color>
+    <color name="text_color_222222">#222222</color>
+
+    <color name="color_1e9aa9">#1e9aa9</color>
+
+    <color name="red_ef2c00">#ef2c00</color>
+
+    <color name="red_e14104">#ffff4800</color>
+    <color name="blue_2196F3">#2196F3</color>
+
+    <color name="game_cate_bg">#bf000000</color>
+
+    <color name="transparent_background">#000000</color>
+
+    <color name="clear">#00000000</color>
+    <color name="black">#ff000000</color>
+    <!--<color name="title_bar">#f82c33</color>-->
+    <!--<color name="title_bar_text">#ffffff</color>-->
+    <color name="half_white">#7fffffff</color>
+
+    <color name="bg_color">#faf8f5</color>
+
+    <color name="gray">#ff707070</color>
+
+    <color name="red">#ffff0000</color>
+    <color name="price">#E02428</color>
+    <color name="label_color">#7F735A</color>
+    <color name="color_463417">#463417</color>
+    <color name="color_d2c9b6">#D2C9B6</color>
+    <color name="color_e7e4de">#E7E4DE</color>
+    <color name="color_453419">#453419</color>
+    <color name="window_bg">#f7f4ef</color>
+    <color name="color_f9f8f4">#f9f8f4</color>
+    <color name="color_e11f36">#e11f36</color>
+    <color name="color_7f735a">#7f735a</color>
+    <color name="color_e11f26">#e11f26</color>
+    <color name="color_f53d48">#f53d48</color>
+    <color name="color_f7f4ef">#f7f4ef</color>
+
+    <!--推荐界面-->
+    <color name="shop_bottom_divider">#f32262</color>
+    <color name="product_bottom_divider">#ffc600</color>
+    <color name="active_bottom_divider">#7391e7</color>
+    <color name="multi_bottom_divider">#ffc600</color>
+    <color name="promote_text_color">#463417</color>
+
+
+    <!--收藏页面-->
+    <color name="favorite_old_price_bg">#80000000</color>
+    <color name="favorite_price_text">#463112</color>
+    <color name="favorite_title_text">#46361d</color>
+    <color name="favorite_nums_text">#f53453</color>
+
+    <!--登录界面-->
+    <color name="login_text_color">#7f735a</color>
+
+    <!-- dialog -->
+    <color name="dialog_bgcolor">#686868</color>
+    <color name="dialog_contentcolor">#292929</color>
+    <drawable name="dialog_window">#AA000000</drawable>
+
+    <!--个人中心-优惠券界面-->
+    <color name="shop_name_background">#ff4d39</color>
+    <color name="list_item_rmb_color">#e71c22</color>
+    <color name="list_item_condition_text">#7f735d</color>
+    <color name="list_item_date_text">#d5cdc0</color>
+    <color name="coupon_state_unuse_text">#ffb9ad</color>
+    <color name="coupon_state_used_text">#f7f1e3</color>
+
+    <color name="common_date_text">#ffb3a2</color>
+    <color name="common_date_text_used">#ebe4dc</color>
+    <color name="common_title_text">#44321e</color>
+    <color name="common_condition_txt">#77715b</color>
+
+    <!--个人中心-设置-->
+    <color name="help_describe_text">#422c05</color>
+    <color name="help_telphone">#d7d2bf</color>
+    <color name="item_text_color">#7f735a</color>
+
+    <!--玩·物-->
+    <color name="gimcrack_date_color">#e11f26</color>
+    <color name="gimcrack_desc_color">#7c7259</color>
+    <color name="group_title_text_color">#463417</color>
+    <color name="group_date_text_color">#d0c7b4</color>
+
+    <color name="cpb_grey">#ffdedede</color>
+    <color name="cpb_blue">#ff0099cc</color>
+    <color name="cpb_blue_dark">#ff00719b</color>
+    <color name="cpb_red">#ffff4444</color>
+    <color name="cpb_red_dark">#ffcd3a3a</color>
+    <color name="cpb_green">#ff99cc00</color>
+    <color name="cpb_green_dark">#ff6d9b00</color>
+    <color name="cpb_white">@android:color/white</color>
+
+    <color name="color_f3f3f3">#f3f3f3</color>
+    <color name="t_input_bg">#f9f9f9</color>
+
+    <color name="dark_grey">#676767</color>
+    <color name="bg_letter">#f5f5f5</color>
+
+    <color name="dark_red">#ff4800</color>
+
+    <color name="light_black">#222222</color>
+    <color name="light_red">#FB4A36</color>
+
+    <color name="light_grey">#DADADE</color>
+
+    <color name="grey">#979797</color>
+
+    <color name="more_light_black">#303030</color>
+
+    <color name="more_dark_red">#FF0000</color>
+
+    <color name="dark_white">#F8F8F8</color>
+
+    <color name="more_light_red">#FF7225</color>
+
+    <color name="light_blue">#007aff</color>
+
+    <color name="more_light_grey">#d1d1d1</color>
+
+    <color name="bg_filter_normal">#F0F2F5</color>
+    <color name="bg_filter_selected">#CBCBCB</color>
+
+    <color name="filter_stroke">#FF5E1F</color>
+
+    <color name="color_divider">#CBCBCB</color>
+
+    <color name="fifty_transparent_black">#80000000</color>
+
+    <color name="edit_hint">#e0e0e0</color>
+
+    <color name="divider_grey">#D2D2D2</color>
+
+    <color name="service_bar">#FF9E7C</color>
+
+
+    <color name="orange">#ff7200</color>
+
+    <color name="bg_search_edit">#eeeeee</color>
+
+    <color name="bg_search_flow">#F2F3F6</color>
+
+    <color name="blue">#007AFF</color>
+
+    <color name="hint_text_color">#CCCCCC</color>
+
+    <color name="divider">#F2F3F6</color>
+
+    <color name="color_f2f3f6">#f2f3f6</color>
+
+    <color name="yellow">#FF9900</color>
+
+    <color name="color_ececec">#ECECEC</color>
+
+    <color name="color_fafcfd">#FAFCFD</color>
+
+    <color name="color_f74b3d">#F74B3D</color>
+
+    <color name="color_dcdcdc">#DCDCDC</color>
 
 </resources>

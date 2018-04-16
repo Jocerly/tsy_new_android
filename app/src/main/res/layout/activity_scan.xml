@@ -19,7 +19,7 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/px300"
             android:layout_alignParentTop="true"
-            android:background="@mipmap/shadow" />
+            android:background="@drawable/shadow" />
 
         <RelativeLayout
             android:id="@+id/capture_crop_view"
@@ -35,7 +35,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:src="@mipmap/scan_line"
+                android:src="@drawable/scan_line"
                 android:visibility="visible" />
         </RelativeLayout>
 
@@ -47,7 +47,7 @@
             android:layout_marginTop="12dp"
             android:layout_toEndOf="@+id/capture_crop_view"
             android:layout_toRightOf="@+id/capture_crop_view"
-            android:background="@mipmap/light_not" />
+            android:background="@drawable/light_not" />
 
         <ImageView
             android:id="@+id/capture_mask_bottom"
@@ -55,7 +55,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_below="@id/capture_crop_view"
-            android:background="@mipmap/shadow" />
+            android:background="@drawable/shadow" />
 
         <ImageView
             android:id="@+id/capture_mask_left"
@@ -64,7 +64,7 @@
             android:layout_above="@id/capture_mask_bottom"
             android:layout_alignParentLeft="true"
             android:layout_below="@id/capture_mask_top"
-            android:background="@mipmap/shadow" />
+            android:background="@drawable/shadow" />
 
         <ImageView
             android:id="@+id/capture_mask_right"
@@ -73,7 +73,7 @@
             android:layout_above="@id/capture_mask_bottom"
             android:layout_alignParentRight="true"
             android:layout_below="@id/capture_mask_top"
-            android:background="@mipmap/shadow" />
+            android:background="@drawable/shadow" />
     </RelativeLayout>
 
 

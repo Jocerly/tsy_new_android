@@ -102,7 +102,7 @@ public class ScanActivity extends BaseActivity implements SurfaceHolder.Callback
     @OnClick(R.id.textLight)
     public void doLight(){
         mCameraManager.switchLight();
-        textLight.setBackgroundResource(mCameraManager.getIsOpenLight() ? R.mipmap.light : R.mipmap.light_not);
+        textLight.setBackgroundResource(mCameraManager.getIsOpenLight() ? R.drawable.light : R.drawable.light_not);
     }
 
     @Override

@@ -134,7 +134,7 @@ public class ScanLineView extends View {
         lineRect.right = frame.right - MIDDLE_LINE_PADDING;
         lineRect.top = slideTop;
         lineRect.bottom = (slideTop + MIDDLE_LINE_WIDTH);
-        canvas.drawBitmap(BitmapFactory.decodeResource(getResources(), R.mipmap.scan_line), null,
+        canvas.drawBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.scan_line), null,
                 mRect, mPaint);
 
         Log.e(TAG, "drawScanningLine: "+"" );

@@ -7,39 +7,25 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.text.TextUtils;
-import android.view.View;
-import android.view.WindowManager;
-
-import com.zhy.autolayout.AutoLayoutActivity;
 
 import cn.tsy.base.okhttp.RequestParams;
-import cn.tsy.base.ui.I_JCActivity;
-import cn.tsy.base.ui.JCActivityStack;
+import cn.tsy.base.ui.I_JCFragment;
 import cn.tsy.base.ui.ViewInject;
 import cn.tsy.base.uitls.JCLoger;
 
 /**
- * 基类，所以activity都需要继承该类
- * Created by Jocerly on 2018/4/10.
+ * Fragment基类
+ * Created by Jocerly on 2018/4/16.
  */
-public abstract class BaseActivity extends AutoLayoutActivity implements I_JCActivity {
-    public Activity aty;
+public abstract class BaseFragment extends Fragment implements I_JCFragment {
+    protected Activity aty;
     protected RequestParams params = null;
     protected Fragment currentFragment;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        aty = this;
-        super.onCreate(savedInstanceState);
-        JCActivityStack.create().addActivity(this);
-        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
-    }
-
-    @Override
-    protected void onDestroy() {
+    public void onDestroy() {
         super.onDestroy();
         JCLoger.debug(aty.getClass().getName() + "---------onDestroy ");
-        JCActivityStack.create().finishActivity(this);
         currentFragment = null;
         aty = null;
     }
@@ -88,15 +74,7 @@ public abstract class BaseActivity extends AutoLayoutActivity implements I_JCAct
         Intent intent = new Intent();
         intent.setClass(context, cls);
         startActivity(intent);
-        overridePendingTransition(R.anim.in_from_right, R.anim.out_to_left);
-    }
-
-    @Override
-    public void finish() {
-        super.finish();
-//        if (!(aty instanceof SplashActivity) && !(aty instanceof LoginActivity)) {
-//            overridePendingTransition(R.anim.in_from_left, R.anim.out_to_right);
-//        }
+        aty.overridePendingTransition(R.anim.in_from_right, R.anim.out_to_left);
     }
 
     /**
@@ -107,7 +85,7 @@ public abstract class BaseActivity extends AutoLayoutActivity implements I_JCAct
         Intent intent = new Intent();
         intent.setClass(context, cls);
         startActivityForResult(intent, requestCode);
-        overridePendingTransition(R.anim.in_from_right, R.anim.out_to_left);
+        aty.overridePendingTransition(R.anim.in_from_right, R.anim.out_to_left);
     }
 
     /**
@@ -118,7 +96,7 @@ public abstract class BaseActivity extends AutoLayoutActivity implements I_JCAct
         intent.putExtras(extras);
         intent.setClass(context, cls);
         startActivityForResult(intent, requestCode);
-        overridePendingTransition(R.anim.in_from_right, R.anim.out_to_left);
+        aty.overridePendingTransition(R.anim.in_from_right, R.anim.out_to_left);
     }
 
     /**
@@ -130,7 +108,7 @@ public abstract class BaseActivity extends AutoLayoutActivity implements I_JCAct
         intent.setClass(context, cls);
         intent.addFlags(flag);
         startActivity(intent);
-        overridePendingTransition(R.anim.in_from_right, R.anim.out_to_left);
+        aty.overridePendingTransition(R.anim.in_from_right, R.anim.out_to_left);
     }
 
     /**
@@ -143,7 +121,7 @@ public abstract class BaseActivity extends AutoLayoutActivity implements I_JCAct
         intent.putExtras(extras);
         intent.setFlags(flag);
         startActivity(intent);
-        overridePendingTransition(R.anim.in_from_right, R.anim.out_to_left);
+        aty.overridePendingTransition(R.anim.in_from_right, R.anim.out_to_left);
     }
 
     /**
@@ -161,8 +139,9 @@ public abstract class BaseActivity extends AutoLayoutActivity implements I_JCAct
         intent.putExtras(extras);
         intent.setClass(context, cls);
         startActivity(intent);
-        overridePendingTransition(R.anim.in_from_right, R.anim.out_to_left);
+        aty.overridePendingTransition(R.anim.in_from_right, R.anim.out_to_left);
     }
+
 
     /**
      * 用Fragment替换视图
@@ -174,42 +153,13 @@ public abstract class BaseActivity extends AutoLayoutActivity implements I_JCAct
         if (targetFragment.equals(currentFragment)) {
             return;
         }
-//        FragmentTransaction transaction = getFragmentManager().beginTransaction();
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+//        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         if (currentFragment != null && currentFragment.isVisible()) {
             transaction.hide(currentFragment);
         }
         if (!targetFragment.isAdded()) {
             transaction.add(layoutId, targetFragment, targetFragment.getClass().getName());
-        }
-        if (targetFragment.isHidden()) {
-            transaction.show(targetFragment);
-//            transaction.remove(currentFragment);//移除当前Fragment，下次打开需要从新初始化
-        }
-        currentFragment = targetFragment;
-//        transaction.commit();
-        transaction.setTransition(android.support.v4.app.FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-        //transaction.commit();-->出现了这个错误 IllegalStateException: Can not perform this action after onSaveInstanceState
-        transaction.commitAllowingStateLoss();
-    }
-
-    /**
-     * 用Fragment替换视图
-     *
-     * @param layout       将要被替换掉的视图
-     * @param targetFragment 用来替换的Fragment
-     */
-    public void changeFragment(View layout, Fragment targetFragment) {
-        if (targetFragment.equals(currentFragment)) {
-            return;
-        }
-//        FragmentTransaction transaction = getFragmentManager().beginTransaction();
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        if (currentFragment != null && currentFragment.isVisible()) {
-            transaction.hide(currentFragment);
-        }
-        if (!targetFragment.isAdded()) {
-            transaction.add(layout.getId(), targetFragment, targetFragment.getClass().getName());
         }
         if (targetFragment.isHidden()) {
             transaction.show(targetFragment);
