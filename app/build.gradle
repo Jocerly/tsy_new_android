@@ -84,7 +84,7 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:3.0.1', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile project(':picture_lib')
+    compile project(':lib_picture')
     //组件化切换
     if (isModule.toBoolean()) {
     } else {

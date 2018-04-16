@@ -1,1 +1,1 @@
-include ':app', ':tsy_base',"picture_lib"
+include ':app', ':lib_common',"lib_picture"

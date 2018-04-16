@@ -15,5 +15,5 @@ android {
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile project(':tsy_base')
+    compile project(':lib_common')
 }
