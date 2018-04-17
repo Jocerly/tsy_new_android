@@ -20,6 +20,7 @@ import com.luck.picture.lib.entity.LocalMedia;
 import com.tsy.tsy.BaseFragment;
 import com.tsy.tsy.R;
 import com.tsy.tsy.okhttp.RequestCenter;
+import com.tsy.tsy.ui.MyListActivity;
 import com.tsy.tsy.ui.ScanActivity;
 import com.tsy.tsy.uitls.ImageUtils;
 
@@ -63,7 +64,8 @@ public class HomeFragment extends BaseFragment {
     NumberProgressBar numberProgressBar;
     @BindView(R.id.image)
     ImageView mImage;
-
+    @BindView(R.id.btnList)
+    Button btnList;
     Unbinder unbinder;
 
     private static final int quality = 20;
@@ -235,6 +237,11 @@ public class HomeFragment extends BaseFragment {
                 .isGif(false)
                 .selectionMedia(mLocalMedia)
                 .forResult(PictureConfig.CHOOSE_REQUEST);
+    }
+
+    @OnClick(R.id.btnList)
+    public void onBtnListClicked() {
+        showActivity(aty, MyListActivity.class);
     }
 
     @Override

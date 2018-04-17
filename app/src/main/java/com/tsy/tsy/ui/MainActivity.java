@@ -1,7 +1,7 @@
 package com.tsy.tsy.ui;
 
 import android.os.Bundle;
-import android.widget.LinearLayout;
+import android.widget.FrameLayout;
 import android.widget.RadioButton;
 
 import com.tsy.tsy.BaseActivity;
@@ -28,7 +28,7 @@ public class MainActivity extends BaseActivity {
     MemberCenterFragment memberCenterFragment;
 
     @BindView(R.id.llFragment)
-    LinearLayout llFragment;
+    FrameLayout llFragment;
     @BindView(R.id.rbHome)
     RadioButton rbHome;
     @BindView(R.id.rbBuy)

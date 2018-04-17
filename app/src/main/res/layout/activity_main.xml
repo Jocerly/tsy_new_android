@@ -3,13 +3,13 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <LinearLayout
+    <FrameLayout
         android:id="@+id/llFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1">
 
-    </LinearLayout>
+    </FrameLayout>
 
     <RadioGroup
         android:layout_width="match_parent"

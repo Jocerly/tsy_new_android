@@ -70,6 +70,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="下载文件" />
+
+        <Button
+            android:id="@+id/btnList"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="列表" />
     </LinearLayout>
 
     <cn.tsy.base.views.NumberProgressBar
