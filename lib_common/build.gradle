@@ -32,9 +32,6 @@ dependencies {
     compile "com.android.support:recyclerview-v7:$rootProject.ext.suppportLib"
     compile 'com.zhy:autolayout:1.4.5'
 
-    compile "io.reactivex.rxjava2:rxjava:$rootProject.ext.rxjava"
-    compile "io.reactivex.rxjava2:rxandroid:$rootProject.ext.rxandroid"
-
     //router
 //    compile "com.github.mzule.activityrouter:activityrouter:$rootProject.routerVersion"
 }
