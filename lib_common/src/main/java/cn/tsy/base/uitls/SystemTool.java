@@ -202,7 +202,7 @@ public final class SystemTool {
         String version = "0";
         try {
             version = context.getPackageManager().getPackageInfo(
-                    context.getPackageName(), 0).versionName;
+                    context.getPackageName(), PackageManager.GET_ACTIVITIES).versionName;
         } catch (NameNotFoundException e) {
             throw new RuntimeException(SystemTool.class.getName()
                     + "the application not found");
@@ -217,7 +217,7 @@ public final class SystemTool {
         int version = 0;
         try {
             version = context.getPackageManager().getPackageInfo(
-                    context.getPackageName(), 0).versionCode;
+                    context.getPackageName(), PackageManager.GET_ACTIVITIES).versionCode;
         } catch (NameNotFoundException e) {
             throw new RuntimeException(SystemTool.class.getName()
                     + "the application not found");

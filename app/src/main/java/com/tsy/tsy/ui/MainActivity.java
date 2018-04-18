@@ -43,7 +43,7 @@ public class MainActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-        JCLoger.debug(URLConfig.NetConfig.URL_HOST + "------" + URLConfig.NetConfig.OnTag);
+        JCLoger.debug(URLConfig.URL_HOST + "------" + URLConfig.OnTag);
         initView();
         initData();
     }

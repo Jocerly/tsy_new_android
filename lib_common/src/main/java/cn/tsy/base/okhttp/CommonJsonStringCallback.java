@@ -15,6 +15,7 @@ import okhttp3.Response;
  */
 public class CommonJsonStringCallback implements Callback {
     //自定义异常类型
+    protected final int RESULT_CODE_SUC = 0;
     protected final int NETWORK_ERROR = -1; //the network relative error
     protected final int JSON_ERROR = -2; //the JSON relative error
     protected final int OTHER_ERROR = -3; //the unknow error
@@ -32,7 +33,7 @@ public class CommonJsonStringCallback implements Callback {
         mDeliveryHandler.post(new Runnable() {
             @Override
             public void run() {
-                mListener.onFailure(new OkHttpException(NETWORK_ERROR, e));
+                mListener.onFailure(NETWORK_ERROR, e.getMessage());
             }
         });
     }
@@ -50,9 +51,9 @@ public class CommonJsonStringCallback implements Callback {
 
     private void handleResponse(Object responseObj) {
         if (responseObj != null) { //表明正确的转为了实体对象
-            mListener.onSuccess(responseObj);
+            mListener.onSuccess(RESULT_CODE_SUC, "", responseObj);
         } else {
-            mListener.onFailure(new OkHttpException(JSON_ERROR, ""));
+            mListener.onFailure(JSON_ERROR, "");
         }
     }
 }

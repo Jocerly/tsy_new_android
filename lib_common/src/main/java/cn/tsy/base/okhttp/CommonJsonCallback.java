@@ -10,6 +10,7 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 
+import cn.tsy.base.uitls.JCLoger;
 import okhttp3.Response;
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -48,7 +49,7 @@ public class CommonJsonCallback implements Callback {
         mDeliveryHandler.post(new Runnable() {
             @Override
             public void run() {
-                mListener.onFailure(new OkHttpException(NETWORK_ERROR, e));
+                mListener.onFailure(NETWORK_ERROR, e.getMessage());
             }
         });
     }
@@ -73,33 +74,34 @@ public class CommonJsonCallback implements Callback {
     private void handleResponse(Object responseObj) {
         //为了保证代码的健壮性
         if (responseObj == null && responseObj.toString().trim().equals("")) {
-            mListener.onFailure(new OkHttpException(NETWORK_ERROR, EMPTY_MSG));
+            mListener.onFailure(NETWORK_ERROR, EMPTY_MSG);
             return;
         }
         try {
             JSONObject result = new JSONObject(responseObj.toString());
+            JCLoger.debug(result.toString());
             if (result.has(RESULT_CODE) && result.has(ERROR_MSG) && result.has(DATA)) {
                 //从JSON对象中取出我们的响应码，如果为0，则是正确的响应
                 if (result.getInt(RESULT_CODE) == RESULT_CODE_VALUE) {
                     if (mClass == null) {
-                        mListener.onSuccess(result.get(DATA));
+                        mListener.onSuccess(result.getInt(RESULT_CODE), result.getString(ERROR_MSG), result.get(DATA));
                     } else { //需要转化为实体对象
-                        Object obj = new Gson().fromJson((String) result.get(DATA), mClass);
+                        Object obj = new Gson().fromJson(result.getString(DATA), mClass);
                         if (obj != null) { //表明正确的转为了实体对象
-                            mListener.onSuccess(obj);
+                            mListener.onSuccess(result.getInt(RESULT_CODE), result.getString(ERROR_MSG), obj);
                         } else {
-                            mListener.onFailure(new OkHttpException(result.getInt(RESULT_CODE), result.get(ERROR_MSG)));
+                            mListener.onFailure(result.getInt(RESULT_CODE), result.getString(ERROR_MSG));
                         }
                     }
                 } else { //将服务端返回的异常回调到应用层去处理
-                    mListener.onFailure(new OkHttpException(result.getInt(RESULT_CODE), result.get(ERROR_MSG)));
+                    mListener.onFailure(result.getInt(RESULT_CODE), result.getString(ERROR_MSG));
                 }
             } else {
-                mListener.onFailure(new OkHttpException(JSON_ERROR, EMPTY_MSG));
+                mListener.onFailure(result.getInt(RESULT_CODE), result.getString(ERROR_MSG));
             }
         } catch (Exception e) {
             e.printStackTrace();
-            mListener.onFailure(new OkHttpException(OTHER_ERROR, e.getMessage()));
+            mListener.onFailure(OTHER_ERROR, e.getMessage());
         }
     }
 }
