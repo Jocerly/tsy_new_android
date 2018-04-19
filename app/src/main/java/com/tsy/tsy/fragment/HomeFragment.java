@@ -200,7 +200,7 @@ public class HomeFragment extends BaseFragment {
         RequestCenter.downloadFileRequest("http://img.zcool.cn/community/010f87596f13e6a8012193a363df45.jpg@1280w_1l_2o_100sh.jpg",
                 mImageRootDir, new DisposeDownlaodListener() {
                     @Override
-                    public void onDownloadSuccess(String path) {
+                    public void onDownloadSuccess(String path, File file) {
                         JCLoger.debug(path);
                         toast("下载完成，文件：" + path);
                     }

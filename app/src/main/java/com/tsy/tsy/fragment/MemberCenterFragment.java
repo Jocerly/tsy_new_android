@@ -109,7 +109,6 @@ public class MemberCenterFragment extends BaseFragment {
             public void onFailure(int errCode, String errMessage) {
                 toast(errCode + "----" + errMessage);
             }
-
         }, Checkversion.class);
     }
 

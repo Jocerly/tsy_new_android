@@ -85,7 +85,7 @@ public class CommonDownloadCallback implements Callback {
             mDeliveryHandler.post(new Runnable() {
                 @Override
                 public void run() {
-                    mListener.onDownloadSuccess(file.getAbsolutePath());
+                    mListener.onDownloadSuccess(file.getAbsolutePath(), file);
                 }
             });
         } catch (final Exception e) {
