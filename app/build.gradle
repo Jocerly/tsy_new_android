@@ -117,8 +117,8 @@ dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     //    annotationProcessor "com.github.mzule.activityrouter:compiler:$rootProject.annotationProcessor"
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
-    implementation project(':lib_picture')
-    implementation project(':lib_common')
+    implementation project(':lib.picture')
+    implementation project(':lib.common')
 
     //组件化切换
     //    if (isModule.toBoolean()) {

@@ -1,1 +1,1 @@
-include ':app', ':lib_common', ':plugin_demo', ':plugin_didi_demo', ":lib_picture", 'chajiandemo'
+include ':app', ':lib.common', ':app.plugin', ':lib.picture', ':app.chajian'

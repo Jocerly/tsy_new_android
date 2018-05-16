@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-
-    <color name="reveal_color">#1b000000</color>
-    <color name="top_bar_bg">#e14104</color>
-    <color name="title_bar_bg">#ffe14104</color>
-    <color name="title_bar_text">#ffffffff</color>
-
-</resources>
