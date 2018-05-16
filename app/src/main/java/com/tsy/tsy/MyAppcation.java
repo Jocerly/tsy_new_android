@@ -22,10 +22,6 @@ import dalvik.system.DexClassLoader;
 
 public class MyAppcation extends Application {
     private static Context context;
-    public static DexClassLoader mClassLoader;
-    private AssetManager assetManager;
-    private Resources newResource;
-    private Resources.Theme mTheme;
 
     @Override
     public void onCreate() {
@@ -39,45 +35,7 @@ public class MyAppcation extends Application {
     protected void attachBaseContext(Context base) {
         super.attachBaseContext(base);
         context = base;
-        PluginManager.getInstance(base).init();
 
-        initPluginManager();
-    }
-
-    private void initPluginManager() {
-        try {
-            //创建我们自己的Resource
-            String apkPath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/plugin.apk";
-            String mPath = getPackageResourcePath();
-
-            assetManager = AssetManager.class.newInstance();
-            Method addAssetPathMethod = assetManager.getClass().getDeclaredMethod("addAssetPath", String.class);
-            addAssetPathMethod.setAccessible(true);
-            addAssetPathMethod.invoke(assetManager, apkPath);
-
-            newResource = new Resources(assetManager, getResources().getDisplayMetrics(), getResources().getConfiguration());
-
-            mTheme = newResource.newTheme();
-            mTheme.setTo(super.getTheme());
-        } catch (Exception e) {
-            JCLoger.debug("走了我的callActivityOnCreate 错了 = " + e.getMessage());
-            e.printStackTrace();
-        }
-    }
-
-    @Override
-    public AssetManager getAssets() {
-        return assetManager == null ? super.getAssets() : assetManager;
-    }
-
-    @Override
-    public Resources getResources() {
-        return newResource == null ? super.getResources() : newResource;
-    }
-
-    @Override
-    public Resources.Theme getTheme() {
-        return mTheme == null ? super.getTheme() : mTheme;
     }
 
     public static Context getContext() {

@@ -1,5 +1,4 @@
 apply plugin: 'com.android.application'
-//apply plugin: 'com.didi.virtualapk.host'
 def releaseTime() {
     return new Date().format("yyyy-MM-dd", TimeZone.getTimeZone("UTC"))
 }
@@ -127,7 +126,7 @@ dependencies {
     //    }
     implementation 'com.android.support.constraint:constraint-layout:1.1.0'
 
-    implementation 'com.didi.virtualapk:core:0.9.1'
+
 
 }
 repositories {

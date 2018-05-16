@@ -137,17 +137,6 @@ public class BuyFragment extends BaseFragment {
     @OnClick(R.id.btnDidi)
     public void intoDidiPlugin() {
         File file = new File(Environment.getExternalStorageDirectory().getPath(), "plugin.apk");
-        try {
-            com.didi.virtualapk.PluginManager.getInstance(aty).loadPlugin(file);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-// Given "com.didi.virtualapk.demo" is the package name of plugin APK,
-// and there is an activity called `MainActivity`.
-        Intent intent = new Intent();
-        intent.setClassName(aty, "com.jocerly.plugin.MainActivity");
-        startActivity(intent);
 
     }
 

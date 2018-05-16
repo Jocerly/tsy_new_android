@@ -73,7 +73,6 @@
             android:name=".ui.AdActivity"
             android:screenOrientation="portrait"></activity>
 
-        <activity android:name=".plugin.ProxyActivity"></activity>
     </application>
 
 </manifest>

@@ -7,26 +7,18 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.didi.virtualapk.PluginManager;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.tsy.tsy.BaseFragment;
 import com.tsy.tsy.R;
-import com.tsy.tsy.plugin.AMSHookHelper;
-import com.tsy.tsy.plugin.MyHookHelper;
-import com.tsy.tsy.ui.MainActivity;
-
-import java.io.File;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -118,7 +110,6 @@ public class MemberCenterFragment extends BaseFragment {
     @OnClick(R.id.button2)
     public void intoPlugin() {
         Intent intent = new Intent();
-        intent.setComponent(new ComponentName("com.huanju.chajiandemo", "com.huanju.chajiandemo.MainActivity"));
         startActivity(intent);
     }
 
@@ -126,34 +117,8 @@ public class MemberCenterFragment extends BaseFragment {
     public void onAttach(Context context) {
         super.onAttach(context);
 
-        loadPlugin(context);
     }
 
-    private void loadPlugin(final Context context) {
-        try {
-            new Thread() {
-                @Override
-                public void run() {
-                    //创建一个属于我们自己插件的ClassLoader，我们分析过只能使用DexClassLoader
-                    String cachePath = context.getCacheDir().getAbsolutePath();
-                    String apkPath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/plugin.apk";
-                    DexClassLoader mClassLoader = new DexClassLoader(apkPath, cachePath, cachePath, context.getClassLoader());
-                    MyHookHelper.inject(mClassLoader);
-                    try {
-                        AMSHookHelper.hookActivityManagerNative();
-                        AMSHookHelper.hookActivityThreadHandler();
-                    } catch (Exception e) {
-                        JCLoger.debug("加载异常了 = " + e.getMessage());
-                        e.printStackTrace();
-                    }
-                    JCLoger.debug("加载完成....");
-
-                }
-            }.start();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 
     @Override
     public void onDestroyView() {
