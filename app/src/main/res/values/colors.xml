@@ -190,5 +190,6 @@
     <color name="color_f74b3d">#F74B3D</color>
 
     <color name="color_dcdcdc">#DCDCDC</color>
-
+    <color name="dm_main">#ff285a</color>
+    <color name="dm_black">#262626</color>
 </resources>

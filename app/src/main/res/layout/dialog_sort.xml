@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:gravity="center"
+        android:text="请选择排序方式"
+        android:textColor="@color/dm_black"
+        android:textSize="15sp" />
+
+
+    <RadioGroup
+        android:id="@+id/rgSort"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#E6E6E6"
+        android:orientation="vertical">
+
+        <RadioButton
+            android:id="@+id/rbSort1"
+            style="@style/rbSortStyle"
+            android:checked="true"
+            android:text="推荐" />
+
+        <RadioButton
+            android:id="@+id/rbSort2"
+            style="@style/rbSortStyle"
+            android:text="最热" />
+
+        <RadioButton
+            android:id="@+id/rbSort3"
+            style="@style/rbSortStyle"
+            android:text="最新" />
+
+        <RadioButton
+            android:id="@+id/rbSort4"
+            style="@style/rbSortStyle"
+            android:text="价格升序" />
+
+        <RadioButton
+            android:id="@+id/rbSort5"
+            style="@style/rbSortStyle"
+            android:text="价格降序" />
+
+    </RadioGroup>
+</LinearLayout>

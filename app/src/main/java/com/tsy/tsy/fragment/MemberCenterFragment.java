@@ -1,36 +1,39 @@
 package com.tsy.tsy.fragment;
 
+import android.content.ComponentName;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.didi.virtualapk.PluginManager;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.tsy.tsy.BaseFragment;
 import com.tsy.tsy.R;
-import com.tsy.tsy.config.URLConfig;
-import com.tsy.tsy.entry.Checkversion;
-import com.tsy.tsy.okhttp.RequestCenter;
+import com.tsy.tsy.plugin.AMSHookHelper;
+import com.tsy.tsy.plugin.MyHookHelper;
+import com.tsy.tsy.ui.MainActivity;
 
-import java.security.NoSuchAlgorithmException;
+import java.io.File;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
-import cn.tsy.base.okhttp.DisposeDataListener;
-import cn.tsy.base.okhttp.RequestParams;
 import cn.tsy.base.uitls.JCLoger;
-import cn.tsy.base.uitls.MD5Utils;
-import cn.tsy.base.uitls.SHA;
-import cn.tsy.base.uitls.SystemTool;
+import dalvik.system.DexClassLoader;
 
 /**
  * Created by Jocerly on 2018/4/16.
@@ -82,7 +85,7 @@ public class MemberCenterFragment extends BaseFragment {
 
     @OnClick(R.id.button)
     public void onCheckVersion() {
-        params = new RequestParams();
+       /* params = new RequestParams();
         String code = "";
         try {
             code = SHA.getSHA1(MD5Utils.computeDigest(String.valueOf(SystemTool.getAppVersionCode(aty)).replaceAll(" ", "")));
@@ -109,7 +112,47 @@ public class MemberCenterFragment extends BaseFragment {
             public void onFailure(int errCode, String errMessage) {
                 toast(errCode + "----" + errMessage);
             }
-        }, Checkversion.class);
+        }, Checkversion.class);*/
+    }
+
+    @OnClick(R.id.button2)
+    public void intoPlugin() {
+        Intent intent = new Intent();
+        intent.setComponent(new ComponentName("com.huanju.chajiandemo", "com.huanju.chajiandemo.MainActivity"));
+        startActivity(intent);
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+
+        loadPlugin(context);
+    }
+
+    private void loadPlugin(final Context context) {
+        try {
+            new Thread() {
+                @Override
+                public void run() {
+                    //创建一个属于我们自己插件的ClassLoader，我们分析过只能使用DexClassLoader
+                    String cachePath = context.getCacheDir().getAbsolutePath();
+                    String apkPath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/plugin.apk";
+                    DexClassLoader mClassLoader = new DexClassLoader(apkPath, cachePath, cachePath, context.getClassLoader());
+                    MyHookHelper.inject(mClassLoader);
+                    try {
+                        AMSHookHelper.hookActivityManagerNative();
+                        AMSHookHelper.hookActivityThreadHandler();
+                    } catch (Exception e) {
+                        JCLoger.debug("加载异常了 = " + e.getMessage());
+                        e.printStackTrace();
+                    }
+                    JCLoger.debug("加载完成....");
+
+                }
+            }.start();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

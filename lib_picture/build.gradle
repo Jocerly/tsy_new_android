@@ -14,9 +14,6 @@ android {
 }
 
 dependencies {
-    compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile project(':lib_common')
-
-    compile "io.reactivex.rxjava2:rxjava:$rootProject.ext.rxjava"
-    compile "io.reactivex.rxjava2:rxandroid:$rootProject.ext.rxandroid"
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation project(':lib_common')
 }

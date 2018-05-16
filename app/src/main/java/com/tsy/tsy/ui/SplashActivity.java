@@ -109,17 +109,20 @@ public class SplashActivity extends BaseActivity {
      */
     private void finishPermission() {
         if (isphoneSatte && isFile) {
+            showActivity(aty, MainActivity.class);
+            finish();
             //检查更新
-            if (appAutoUpdate == null) {
-                appAutoUpdate = new AppAutoUpdate(aty, false);
-                appAutoUpdate.setOnAppUpdateClickLister(new AppAutoUpdate.OnAppUpdateClickLister() {
-                    @Override
-                    public void OnCancleClickLister() {
-
-                    }
-                });
-            }
-            appAutoUpdate.checkVersion();
+//            if (appAutoUpdate == null) {
+//                appAutoUpdate = new AppAutoUpdate(aty, false);
+//                appAutoUpdate.setOnAppUpdateClickLister(new AppAutoUpdate.OnAppUpdateClickLister() {
+//                    @Override
+//                    public void OnCancleClickLister() {
+//                        showActivity(aty, MainActivity.class);
+//                        finish();
+//                    }
+//                });
+//            }
+//            appAutoUpdate.checkVersion();
         } else {
             showSettingPermission();
         }

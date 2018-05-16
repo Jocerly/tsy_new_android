@@ -8,4 +8,8 @@
     <string name="str_buy">我要买</string>
     <string name="str_publish">我要卖</string>
     <string name="str_mine">我的</string>
+    <string name="app_id">ca-app-pub-3940256099942544~3347511713</string>
+    <string name="id">ca-app-pub-3940256099942544/6300978111</string>
+    <string name="id2">ca-app-pub-4231493449150054/8982519139</string>
+    <string name="id3">ca-app-pub-4231493449150054/2098133312</string>
 </resources>

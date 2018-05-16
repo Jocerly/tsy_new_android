@@ -1,13 +1,11 @@
 apply plugin: 'com.android.application'
-
-apply plugin: 'com.jakewharton.butterknife'
-
+//apply plugin: 'com.didi.virtualapk.host'
 def releaseTime() {
     return new Date().format("yyyy-MM-dd", TimeZone.getTimeZone("UTC"))
 }
 
 android {
-    compileSdkVersion rootProject.ext.compileSdkVersion
+    compileSdkVersion rootProject.ext.targetSdkVersion
     buildToolsVersion rootProject.ext.buildToolsVersion
 
     defaultConfig {
@@ -16,6 +14,7 @@ android {
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode rootProject.ext.versionCode
         versionName rootProject.ext.versionName
+        flavorDimensions "1"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         resConfigs "zh"
         multiDexEnabled true
@@ -27,10 +26,10 @@ android {
     }
     signingConfigs {
         release {
-            storeFile file("./jks/tsy_release_keystore.jks")
-            storePassword "TSY@2015"
-            keyAlias "taoshouyou"
-            keyPassword "TSY@2015"
+            storeFile file("./jks/tsy_keystore.jks")
+            storePassword "AAA111aaa"
+            keyAlias "Jocerly"
+            keyPassword "AAA111aaa"
         }
     }
     lintOptions {
@@ -45,19 +44,17 @@ android {
             buildConfigField("String", "H5_HOST", "\"https://m.taoshouyou.com/\"")
             buildConfigField("String", "OnTag", "\"tsy_online\"")
 
-            minifyEnabled true
-            shrinkResources true
+            minifyEnabled false
+            shrinkResources false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.release // 签名配置
 
             applicationVariants.all { variant ->
-                variant.outputs.each { output ->
+                variant.outputs.all { output ->
                     def outputFile = output.outputFile
                     if (outputFile != null && outputFile.name.endsWith('.apk')) {
                         // 输出apk名称为app-Channel_360-release-v1.1.3-build113-2016-07-22
-                        def fileName = outputFile.name.replace(".apk", "_v${defaultConfig.versionName}_build${defaultConfig.versionCode}_" +
-                                "${releaseTime()}.apk")
-                        output.outputFile = new File(outputFile.parent, fileName)
+                        outputFileName = "tsy_v${defaultConfig.versionName}_build${defaultConfig.versionCode}_${releaseTime()}.apk"
                     }
                 }
             }
@@ -91,18 +88,16 @@ android {
 //    tasks.withType(JavaCompile) {
 //        compileTask -> compileTask.dependsOn ndkBuild
 //    }
-
+//
     productFlavors {
         Channel_jifengwang {}
         Channel_wandoujia {}
-        Channel_360 {}
+//        Channel_360 {}
         Channel_anzhuoshichang {}
         Channel_baidu {}
         Channel_91 {}
         Channel_anzhiwang {}
-//        Channel_yingyonghui {}
         Channel_lenovostore {}
-//        Channel_huaweistore {}
         Channel_xiaomi {}
         Channel_Default {}
         Channel_yingyongbao {}
@@ -120,20 +115,20 @@ android {
 }
 
 dependencies {
-    compile fileTree(include: ['*.jar'], dir: 'libs')
-//    annotationProcessor "com.github.mzule.activityrouter:compiler:$rootProject.annotationProcessor"
-    annotationProcessor 'com.jakewharton:butterknife-compiler:8.5.1'
-    androidTestCompile('com.android.support.test.espresso:espresso-core:3.0.1', {
-        exclude group: 'com.android.support', module: 'support-annotations'
-    })
-    compile project(':lib_picture')
-//    compile project(':lib_refreshlayout')
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    //    annotationProcessor "com.github.mzule.activityrouter:compiler:$rootProject.annotationProcessor"
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
+    implementation project(':lib_picture')
+    implementation project(':lib_common')
 
-    compile 'com.scwang.smartrefresh:SmartRefreshLayout:1.0.5.1'
     //组件化切换
-//    if (isModule.toBoolean()) {
-//    } else {
-//    }
+    //    if (isModule.toBoolean()) {
+    //    } else {
+    //    }
+    implementation 'com.android.support.constraint:constraint-layout:1.1.0'
+
+    implementation 'com.didi.virtualapk:core:0.9.1'
+
 }
 repositories {
     mavenCentral()

@@ -19,6 +19,21 @@
 
     <style name="AppTheme.PopupOverlay" parent="Base.ThemeOverlay.AppCompat.Light" />
 
+    <!-- dialog样式 -->
+    <style name="MyDialog" parent="@android:style/Theme.Dialog">
+        <item name="android:windowIsFloating">true</item>    <!--是否浮在界面上-->
+        <item name="android:windowIsTranslucent">true</item> <!--是否半透明-->
+        <item name="android:windowNoTitle">false</item>       <!--是否有标题-->
+        <item name="android:windowBackground">@android:color/transparent</item> <!--窗口背景色透明-->
+        <item name="android:backgroundDimEnabled">true</item> <!--背景是否模糊显示-->
+    </style>
+
+    <!-- dialog底部弹出菜单动画 -->
+    <style name="bottom_menu_animation" parent="android:Animation">
+        <item name="android:windowEnterAnimation">@anim/bottom_menu_enter</item>
+        <item name="android:windowExitAnimation">@anim/bottom_menu_exit</item>
+    </style>
+
     <style name="mainRadioButton">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">match_parent</item>
@@ -28,6 +43,24 @@
         <item name="android:textColor">@drawable/rb_main_tv_cor</item>
     </style>
 
+    <style name="lineSortStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">2px</item>
+        <item name="android:background">#E6E6E6</item>
+    </style>
+
+    <style name="rbSortStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">45dp</item>
+        <item name="android:paddingRight">15dp</item>
+        <item name="android:button">@null</item>
+        <item name="android:paddingLeft">30dp</item>
+        <item name="android:layout_marginTop">2px</item>
+        <item name="android:background">@color/white</item>
+        <item name="android:textColor">@drawable/rb_sort_txt_color</item>
+        <item name="android:drawableRight">@drawable/rb_sort_btn</item>
+        <item name="android:gravity">center</item>
+    </style>
 </resources>
 
 

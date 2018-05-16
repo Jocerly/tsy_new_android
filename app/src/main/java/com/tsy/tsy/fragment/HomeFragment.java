@@ -12,6 +12,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.luck.picture.lib.PictureSelector;
 import com.luck.picture.lib.config.PictureConfig;
@@ -19,7 +21,9 @@ import com.luck.picture.lib.config.PictureMimeType;
 import com.luck.picture.lib.entity.LocalMedia;
 import com.tsy.tsy.BaseFragment;
 import com.tsy.tsy.R;
+import com.tsy.tsy.dialog.SortDialog;
 import com.tsy.tsy.okhttp.RequestCenter;
+import com.tsy.tsy.ui.AdActivity;
 import com.tsy.tsy.ui.MyListActivity;
 import com.tsy.tsy.ui.ScanActivity;
 import com.tsy.tsy.uitls.ImageUtils;
@@ -77,6 +81,9 @@ public class HomeFragment extends BaseFragment {
      */
     private final String mImageRootDir = Environment.getExternalStorageDirectory().getPath() + "/jpeg_picture/";
     private List<LocalMedia> mLocalMedia;
+
+    @BindView(R.id.btnAd)
+    Button btnAd;
 
     @Nullable
     @Override
@@ -195,6 +202,12 @@ public class HomeFragment extends BaseFragment {
         showActivity(aty, ScanActivity.class);
     }
 
+
+    @OnClick(R.id.btnAd)
+    public void doBtnAd() {//扫码
+        showActivity(aty, AdActivity.class);
+    }
+
     @OnClick(R.id.btnFile)
     public void downloadFile() {
         RequestCenter.downloadFileRequest("http://img.zcool.cn/community/010f87596f13e6a8012193a363df45.jpg@1280w_1l_2o_100sh.jpg",
@@ -217,6 +230,7 @@ public class HomeFragment extends BaseFragment {
                 });
     }
 
+
     @Override
     public void onDestroy() {
         super.onDestroy();
@@ -224,7 +238,7 @@ public class HomeFragment extends BaseFragment {
 
     @OnClick(R.id.selectPic)
     public void onViewClicked() {
-        PictureSelector.create(this)
+        PictureSelector.create(aty)
                 .openGallery(PictureMimeType.ofImage())
                 .maxSelectNum(3)
                 .imageSpanCount(4)
