@@ -16,4 +16,5 @@ android {
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation project(':lib.common')
+    api files('libs/glide-full-4.7.0.jar')
 }

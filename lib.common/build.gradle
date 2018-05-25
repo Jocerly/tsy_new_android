@@ -33,6 +33,7 @@ dependencies {
     api "com.android.support:recyclerview-v7:$rootProject.ext.suppportLib"
     api 'com.zhy:autolayout:1.4.5'
     api 'com.umeng.analytics:analytics:latest.integration'
+    api 'com.alibaba:fastjson:1.2.20'
     //router
     //    implementation "com.github.mzule.activityrouter:activityrouter:$rootProject.routerVersion"
 }

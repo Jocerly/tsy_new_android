@@ -22,6 +22,7 @@ import butterknife.ButterKnife;
 import cn.tsy.base.uitls.JCLoger;
 
 /**
+ * 广告
  * Created by zxy on 2018/5/3.
  */
 
@@ -58,14 +59,14 @@ public class AdActivity extends Activity {
         mSearchAdView = new SearchAdView(this);
         // Create a search ad. The ad size and ad unit ID must be set before calling loadAd.
         mSearchAdView.setAdSize(AdSize.SEARCH);
-        mSearchAdView.setAdUnitId("partner-vert-pla-mobile-app-pricetrace-srp");//clientID:partner-vert-pla-pricetrace-srp
+        mSearchAdView.setAdUnitId("vert-pla-mobile-app-pricetrace-srp");//clientID:vert-pla-mobile-app-pricetrace-srp
         mSearchAdView.setAdListener(adListener2);
 
         // 这个类封装了广告请求参数。这与在AFSh桌面和移动网站的JavaScript广告请求对象（页面选项，单元选项）中设置参数类似。
         //用适当的设置器设置参数（例如，通过调用设置查询参数setQuery()）
         DynamicHeightSearchAdRequest.Builder builder = new DynamicHeightSearchAdRequest.Builder();
         // Set the query.https://github.com/googleads/googleads-mobile-android-examples
-        builder.setQuery("lcd television");//running shoes、bike
+        builder.setQuery("bike");//running shoes、bike
         // Optionally populate the ad request builder.
         builder.setAdTest(false);
         // Set adType to "plas" to request for AFShMA ads.
