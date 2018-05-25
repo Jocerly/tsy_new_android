@@ -26,15 +26,7 @@ import cn.tsy.base.views.listView.CustomerGridView;
 public class HomeAdapter extends BaseAdapter {
     private Context context;
     private List<SecondCategoriesBean> secondList = new ArrayList<>();
-    private String firstId;
-
-    public String getFirstId() {
-        return firstId;
-    }
-
-    public void setFirstId(String firstId) {
-        this.firstId = firstId;
-    }
+    private OnItemCklickListener onItemCklickListener;
 
     public HomeAdapter(Context context, List<SecondCategoriesBean> secondList) {
         this.context = context;
@@ -57,28 +49,50 @@ public class HomeAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
         ViewHold viewHold = null;
         if (convertView == null) {
             convertView = View.inflate(context, R.layout.item_home, null);
             viewHold = new ViewHold();
             viewHold.gridView = convertView.findViewById(R.id.gridView);
-            viewHold.blank = convertView.findViewById(R.id.blank);
+            viewHold.blank = convertView.findViewById(R.id.tv_titile);
+            viewHold.txtAll = convertView.findViewById(R.id.txtAll);
             convertView.setTag(viewHold);
         } else {
             viewHold = (ViewHold) convertView.getTag();
         }
-        SecondCategoriesBean secondCategoriesBean = secondList.get(position);
-        firstId = secondCategoriesBean.getId();
+        final SecondCategoriesBean secondCategoriesBean = secondList.get(position);
         viewHold.blank.setText(secondCategoriesBean.getSubCategories().getName());
         HomeItemAdapter adapter = new HomeItemAdapter(context, secondCategoriesBean.getSubCategories().getSubCategories());
+        adapter.setOnItemCklickListener(new HomeItemAdapter.OnItemCklickListener() {
+            @Override
+            public void onItemCkick(CategoriesBean subcategory) {
+                onItemCklickListener.onChileItemCkick(subcategory);
+            }
+        });
         viewHold.gridView.setAdapter(adapter);
+        viewHold.txtAll.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onItemCklickListener.onParentItemCkick(position, secondCategoriesBean.getSubCategories().getId());
+            }
+        });
         return convertView;
     }
 
     private static class ViewHold {
         private CustomerGridView gridView;
         private TextView blank;
+        private TextView txtAll;
     }
 
+    public interface OnItemCklickListener {
+        void onParentItemCkick(int position, String id);
+
+        void onChileItemCkick(CategoriesBean subcategory);
+    }
+
+    public void setOnItemCklickListener(OnItemCklickListener onItemCklickListener) {
+        this.onItemCklickListener = onItemCklickListener;
+    }
 }

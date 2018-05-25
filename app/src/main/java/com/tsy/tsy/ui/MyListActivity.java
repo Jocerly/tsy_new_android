@@ -26,6 +26,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * 三级列表展示三级分类信息
@@ -39,6 +40,8 @@ public class MyListActivity extends BaseActivity {
     ListView lvRight;
     @BindView(R.id.tv_titile)
     TextView tvTitile;
+    @BindView(R.id.txtAll)
+    TextView txtAll;
 
     private List<CategoriesBean> firstList = new ArrayList<>();//一级分类列表数据
     private List<SecondCategoriesBean> secondList = new ArrayList<>();//二级分类列表数据，包含一级分类的id
@@ -46,6 +49,7 @@ public class MyListActivity extends BaseActivity {
     private MenuAdapter menuAdapter;
     private HomeAdapter homeAdapter;
     private int visibleItem = 0;
+    private String secondId = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,6 +79,7 @@ public class MyListActivity extends BaseActivity {
         });
 
         homeAdapter = new HomeAdapter(this, secondList);
+        homeAdapter.setOnItemCklickListener(onItemCklickListener);
         lvRight.setAdapter(homeAdapter);
         lvRight.setOnScrollListener(new AbsListView.OnScrollListener() {
             @Override
@@ -117,8 +122,27 @@ public class MyListActivity extends BaseActivity {
     }
 
     private void showTopTxt() {
+        secondId = secondList.get(visibleItem).getSubCategories().getId();
         tvTitile.setText(secondList.get(visibleItem).getSubCategories().getName());
         menuAdapter.notifyDataSetChanged();
+    }
+
+    HomeAdapter.OnItemCklickListener onItemCklickListener = new HomeAdapter.OnItemCklickListener() {
+        @Override
+        public void onParentItemCkick(int position, String id) {
+            secondId = id;
+            toast(secondId);
+        }
+
+        @Override
+        public void onChileItemCkick(CategoriesBean subcategory) {
+            toast(subcategory.getName());
+        }
+    };
+
+    @OnClick(R.id.txtAll)
+    public void clickScanAll() {
+        toast(secondId);
     }
 
     /**

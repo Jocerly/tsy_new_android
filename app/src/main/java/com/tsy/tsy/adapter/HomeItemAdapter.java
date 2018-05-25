@@ -17,22 +17,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * author：wangzihang
- * date： 2017/8/8 19:15
- * desctiption：
- * e-mail：wangzihang@xiaohongchun.com
+ * 三级分类适配器
  */
-
 public class HomeItemAdapter extends BaseAdapter {
 
     private Context context;
     private List<CategoriesBean> thirdList = new ArrayList<>();
+    private OnItemCklickListener onItemCklickListener;
 
     public HomeItemAdapter(Context context, List<CategoriesBean> thirdList) {
         this.context = context;
         this.thirdList = thirdList;
     }
-
 
     @Override
     public int getCount() {
@@ -51,8 +47,8 @@ public class HomeItemAdapter extends BaseAdapter {
 
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        CategoriesBean subcategory = thirdList.get(position);
+    public View getView(final int position, View convertView, ViewGroup parent) {
+        final CategoriesBean subcategory = thirdList.get(position);
         ViewHold viewHold = null;
         if (convertView == null) {
             convertView = View.inflate(context, R.layout.item_home_category, null);
@@ -67,9 +63,14 @@ public class HomeItemAdapter extends BaseAdapter {
         Glide.with(context)
                 .load(subcategory.getImgURL())
                 .into(viewHold.iv_icon);
+
+        convertView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onItemCklickListener.onItemCkick(subcategory);
+            }
+        });
         return convertView;
-
-
     }
 
     private static class ViewHold {
@@ -77,4 +78,11 @@ public class HomeItemAdapter extends BaseAdapter {
         private ImageView iv_icon;
     }
 
+    public interface OnItemCklickListener {
+        void onItemCkick(CategoriesBean subcategory);
+    }
+
+    public void setOnItemCklickListener(OnItemCklickListener onItemCklickListener) {
+        this.onItemCklickListener = onItemCklickListener;
+    }
 }
