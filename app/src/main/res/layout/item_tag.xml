@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/txt_tag"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/tag_nomal"
+    android:ellipsize="end"
+    android:padding="10dp"
+    android:singleLine="true"
+    android:layout_margin="5dp"
+    android:text="测试dnc的农村建设的"
+    android:textColor="@color/text_color_333333"
+    android:textSize="15sp"></TextView>

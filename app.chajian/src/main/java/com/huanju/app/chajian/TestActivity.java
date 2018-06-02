@@ -29,7 +29,7 @@ public class TestActivity extends BaseActivity {
         textView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(TestActivity.this, com.huanju.chajian.TestActivityTwo.class));
+                startActivity(new Intent(TestActivity.this, com.huanju.app.chajian.TestActivityTwo.class));
             }
         });
         setContentView(textView);

@@ -5,7 +5,7 @@
     android:orientation="vertical">
 
 
-    <include layout="@layout/item_top"></include>
+    <include layout="@layout/item_search_single_top"></include>
 
     <cn.tsy.base.views.listView.CustomerGridView
         android:id="@+id/gridView"

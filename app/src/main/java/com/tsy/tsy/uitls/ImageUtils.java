@@ -23,9 +23,13 @@ import cn.tsy.base.uitls.JCLoger;
  * @author Jocerly
  */
 public class ImageUtils {
+//    static {
+//        System.loadLibrary("jpeg");// libjpeg
+//        System.loadLibrary("imagerar");// 我们自己的库
+//    }
+
     static {
-        System.loadLibrary("jpeg");// libjpeg
-        System.loadLibrary("imagerar");// 我们自己的库
+        System.loadLibrary("libimagerar");
     }
 
     /**
@@ -39,8 +43,7 @@ public class ImageUtils {
      * @param optimize 是否采用哈弗曼表数据计算
      * @return "0"失败, "1"成功
      */
-    public static native String compressBitmap(Bitmap bitmap, int width,
-                                               int height, int quality, byte[] fileName, boolean optimize);
+    public static native String compressBitmap(Bitmap bitmap, int width, int height, int quality, byte[] fileName, boolean optimize);
 
     /**
      * 尺寸和质量压缩 没有oom处理

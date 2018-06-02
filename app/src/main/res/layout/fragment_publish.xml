@@ -1,32 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <cn.tsy.base.views.CircleProgressBar
-        android:id="@+id/progress1"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        app:circle_color="#FF285A"
-        app:circle_color_init="#2FFF285A"
-        app:is_show_txt="false" />
+        android:orientation="vertical">
 
-    <ProgressBar
-        android:id="@+id/progress2"
-        style="@android:style/Widget.ProgressBar"
-        android:layout_width="42dp"
-        android:layout_height="42dp"
-        android:layout_centerInParent="true"
-        android:indeterminateDrawable="@drawable/progress_load"  />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-    <Button
-        android:id="@+id/button3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="140dp"
-        android:text="Button" />
+            <cn.tsy.base.views.CircleProgressBar
+                android:id="@+id/progress1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                app:circle_color="#FF285A"
+                app:circle_color_init="#2FFF285A"
+                app:is_show_txt="false" />
 
-</RelativeLayout>
+            <ProgressBar
+                android:id="@+id/progress2"
+                style="@android:style/Widget.ProgressBar"
+                android:layout_width="42dp"
+                android:layout_height="42dp"
+                android:layout_centerHorizontal="true"
+                android:indeterminateDrawable="@drawable/progress_load" />
+
+            <Button
+                android:id="@+id/button3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Button" />
+        </RelativeLayout>
+
+        <cn.tsy.base.views.tagview.TagContainerLayout
+            android:id="@+id/tagLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="100dp"
+            android:padding="10dp"
+            app:container_background_color="@color/white"
+            app:container_border_color="@color/white"
+            app:container_enable_drag="false"
+            app:container_max_lines="4"
+            app:horizontal_interval="10dp"
+            app:tag_border_color="@color/gray"
+            app:tag_clickable="true"
+            app:tag_text_color="@color/text_color_333333"
+            app:tag_text_size="15sp"
+            app:vertical_interval="10dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="已选：" />
+
+        <TextView
+            android:id="@+id/txt_tag_choices"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/red" />
+
+        <cn.tsy.base.views.listView.CustomerListView
+            android:id="@+id/mListView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tagLayout">
+
+        </cn.tsy.base.views.listView.CustomerListView>
+
+
+    </LinearLayout>
+</ScrollView>

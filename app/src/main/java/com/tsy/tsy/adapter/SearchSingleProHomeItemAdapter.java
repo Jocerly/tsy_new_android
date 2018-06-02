@@ -1,7 +1,6 @@
 package com.tsy.tsy.adapter;
 
 import android.content.Context;
-import android.net.Uri;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -11,7 +10,6 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.tsy.tsy.R;
 import com.tsy.tsy.entry.CategoriesBean;
-import com.tsy.tsy.entry.CategoryBean;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,13 +17,13 @@ import java.util.List;
 /**
  * 三级分类适配器
  */
-public class HomeItemAdapter extends BaseAdapter {
+public class SearchSingleProHomeItemAdapter extends BaseAdapter {
 
     private Context context;
     private List<CategoriesBean> thirdList = new ArrayList<>();
     private OnItemCklickListener onItemCklickListener;
 
-    public HomeItemAdapter(Context context, List<CategoriesBean> thirdList) {
+    public SearchSingleProHomeItemAdapter(Context context, List<CategoriesBean> thirdList) {
         this.context = context;
         this.thirdList = thirdList;
     }
@@ -51,7 +49,7 @@ public class HomeItemAdapter extends BaseAdapter {
         final CategoriesBean subcategory = thirdList.get(position);
         ViewHold viewHold = null;
         if (convertView == null) {
-            convertView = View.inflate(context, R.layout.item_home_category, null);
+            convertView = View.inflate(context, R.layout.item_search_single_home_category, null);
             viewHold = new ViewHold();
             viewHold.tv_name = convertView.findViewById(R.id.item_home_name);
             viewHold.iv_icon = convertView.findViewById(R.id.item_album);

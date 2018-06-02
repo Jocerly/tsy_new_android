@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+
 def releaseTime() {
     return new Date().format("yyyy-MM-dd", TimeZone.getTimeZone("UTC"))
 }
@@ -11,7 +12,6 @@ android {
         applicationId "com.tsy.tsy"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode rootProject.ext.versionCode
         versionName rootProject.ext.versionName
         flavorDimensions "1"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"

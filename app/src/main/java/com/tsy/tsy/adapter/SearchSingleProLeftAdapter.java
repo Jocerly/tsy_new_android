@@ -13,19 +13,17 @@ import com.tsy.tsy.entry.CategoriesBean;
 import java.util.ArrayList;
 import java.util.List;
 
-import cn.tsy.base.uitls.JCLoger;
-
 /**
  * 左侧菜单ListView的适配器
  *
  * @author Administrator
  */
-public class MenuAdapter extends BaseAdapter {
+public class SearchSingleProLeftAdapter extends BaseAdapter {
     private Context context;
     private String id = "";
     private List<CategoriesBean> list = new ArrayList<>();
 
-    public MenuAdapter(Context context, List<CategoriesBean> list) {
+    public SearchSingleProLeftAdapter(Context context, List<CategoriesBean> list) {
         this.context = context;
         this.list = list;
     }
@@ -58,7 +56,7 @@ public class MenuAdapter extends BaseAdapter {
         ViewHolder holder = null;
         if (convertView == null) {
             holder = new ViewHolder();
-            convertView = View.inflate(context, R.layout.item_menu, null);
+            convertView = View.inflate(context, R.layout.item_search_single_left, null);
             holder.tv_name = convertView.findViewById(R.id.item_name);
             convertView.setTag(holder);
         } else {

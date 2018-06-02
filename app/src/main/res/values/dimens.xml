@@ -26,4 +26,7 @@
     <dimen name="px650">350px</dimen>
     <dimen name="px750">750px</dimen>
 
+    <dimen name="pad5">5dp</dimen>
+    <dimen name="pad10">10dp</dimen>
+
 </resources>

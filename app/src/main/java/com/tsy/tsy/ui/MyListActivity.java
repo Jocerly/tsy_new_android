@@ -12,8 +12,8 @@ import android.widget.TextView;
 import com.alibaba.fastjson.JSONObject;
 import com.tsy.tsy.BaseActivity;
 import com.tsy.tsy.R;
-import com.tsy.tsy.adapter.HomeAdapter;
-import com.tsy.tsy.adapter.MenuAdapter;
+import com.tsy.tsy.adapter.SearchSingleProHomeAdapter;
+import com.tsy.tsy.adapter.SearchSingleProLeftAdapter;
 import com.tsy.tsy.entry.CategoriesBean;
 import com.tsy.tsy.entry.CategorysBean;
 import com.tsy.tsy.entry.SecondCategoriesBean;
@@ -46,8 +46,8 @@ public class MyListActivity extends BaseActivity {
     private List<CategoriesBean> firstList = new ArrayList<>();//一级分类列表数据
     private List<SecondCategoriesBean> secondList = new ArrayList<>();//二级分类列表数据，包含一级分类的id
 
-    private MenuAdapter menuAdapter;
-    private HomeAdapter homeAdapter;
+    private SearchSingleProLeftAdapter menuAdapter;
+    private SearchSingleProHomeAdapter homeAdapter;
     private int visibleItem = 0;
     private String secondId = "";
 
@@ -63,7 +63,7 @@ public class MyListActivity extends BaseActivity {
 
     @Override
     public void initView() {
-        menuAdapter = new MenuAdapter(this, firstList);
+        menuAdapter = new SearchSingleProLeftAdapter(this, firstList);
         lvLeft.setAdapter(menuAdapter);
         lvLeft.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -78,7 +78,7 @@ public class MyListActivity extends BaseActivity {
             }
         });
 
-        homeAdapter = new HomeAdapter(this, secondList);
+        homeAdapter = new SearchSingleProHomeAdapter(this, secondList);
         homeAdapter.setOnItemCklickListener(onItemCklickListener);
         lvRight.setAdapter(homeAdapter);
         lvRight.setOnScrollListener(new AbsListView.OnScrollListener() {
@@ -127,7 +127,7 @@ public class MyListActivity extends BaseActivity {
         menuAdapter.notifyDataSetChanged();
     }
 
-    HomeAdapter.OnItemCklickListener onItemCklickListener = new HomeAdapter.OnItemCklickListener() {
+    SearchSingleProHomeAdapter.OnItemCklickListener onItemCklickListener = new SearchSingleProHomeAdapter.OnItemCklickListener() {
         @Override
         public void onParentItemCkick(int position, String id) {
             secondId = id;

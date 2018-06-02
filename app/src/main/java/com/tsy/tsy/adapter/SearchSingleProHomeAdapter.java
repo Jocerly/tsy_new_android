@@ -9,12 +9,10 @@ import android.widget.TextView;
 
 import com.tsy.tsy.R;
 import com.tsy.tsy.entry.CategoriesBean;
-import com.tsy.tsy.entry.CategoryBean;
 import com.tsy.tsy.entry.SecondCategoriesBean;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import cn.tsy.base.views.listView.CustomerGridView;
 
@@ -23,12 +21,12 @@ import cn.tsy.base.views.listView.CustomerGridView;
  *
  * @author Administrator
  */
-public class HomeAdapter extends BaseAdapter {
+public class SearchSingleProHomeAdapter extends BaseAdapter {
     private Context context;
     private List<SecondCategoriesBean> secondList = new ArrayList<>();
     private OnItemCklickListener onItemCklickListener;
 
-    public HomeAdapter(Context context, List<SecondCategoriesBean> secondList) {
+    public SearchSingleProHomeAdapter(Context context, List<SecondCategoriesBean> secondList) {
         this.context = context;
         this.secondList = secondList;
     }
@@ -52,7 +50,7 @@ public class HomeAdapter extends BaseAdapter {
     public View getView(final int position, View convertView, ViewGroup parent) {
         ViewHold viewHold = null;
         if (convertView == null) {
-            convertView = View.inflate(context, R.layout.item_home, null);
+            convertView = View.inflate(context, R.layout.item_search_single_home, null);
             viewHold = new ViewHold();
             viewHold.gridView = convertView.findViewById(R.id.gridView);
             viewHold.blank = convertView.findViewById(R.id.tv_titile);
@@ -63,8 +61,8 @@ public class HomeAdapter extends BaseAdapter {
         }
         final SecondCategoriesBean secondCategoriesBean = secondList.get(position);
         viewHold.blank.setText(secondCategoriesBean.getSubCategories().getName());
-        HomeItemAdapter adapter = new HomeItemAdapter(context, secondCategoriesBean.getSubCategories().getSubCategories());
-        adapter.setOnItemCklickListener(new HomeItemAdapter.OnItemCklickListener() {
+        SearchSingleProHomeItemAdapter adapter = new SearchSingleProHomeItemAdapter(context, secondCategoriesBean.getSubCategories().getSubCategories());
+        adapter.setOnItemCklickListener(new SearchSingleProHomeItemAdapter.OnItemCklickListener() {
             @Override
             public void onItemCkick(CategoriesBean subcategory) {
                 onItemCklickListener.onChileItemCkick(subcategory);
