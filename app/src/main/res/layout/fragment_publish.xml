@@ -66,14 +66,14 @@
             android:layout_height="wrap_content"
             android:textColor="@color/red" />
 
-        <cn.tsy.base.views.listView.CustomerListView
-            android:id="@+id/mListView"
+        <LinearLayout
+            android:id="@+id/tag_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/tagLayout">
+            android:orientation="vertical"
+            android:padding="5dp">
 
-        </cn.tsy.base.views.listView.CustomerListView>
-
+        </LinearLayout>
 
     </LinearLayout>
 </ScrollView>

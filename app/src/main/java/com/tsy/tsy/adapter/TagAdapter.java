@@ -1,6 +1,8 @@
 package com.tsy.tsy.adapter;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
+import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,7 +18,7 @@ import java.util.List;
 
 import cn.tsy.base.uitls.JCLoger;
 
-public class TagAdapter extends BaseAdapter {
+public class TagAdapter extends RecyclerView.Adapter<TagAdapter.ViewHolder> {
     private Context context;
     private List<String> tags = new ArrayList<>();
 
@@ -32,13 +34,20 @@ public class TagAdapter extends BaseAdapter {
     }
 
     @Override
-    public int getCount() {
+    public int getItemCount() {
         return tags.size() >= 12 ? 4 : tags.size() / 3 + ((tags.size() % 3) > 0 ? 1 : 0);
     }
 
+    @NonNull
     @Override
-    public Object getItem(int position) {
-        return tags.get(position);
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View convertView = LayoutInflater.from(context).inflate(R.layout.item_tags, parent, false);
+        return new ViewHolder(convertView);
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull ViewHolder viewHolder, int position) {
+        setTagToLayout(viewHolder.tag_layout, position);
     }
 
     @Override
@@ -46,24 +55,8 @@ public class TagAdapter extends BaseAdapter {
         return position;
     }
 
-    @Override
-    public View getView(final int position, View convertView, ViewGroup parent) {
-        final ViewHolder viewHolder;
-        if (convertView == null) {
-            viewHolder = new ViewHolder();
-            convertView = LayoutInflater.from(context).inflate(R.layout.item_tags, parent, false);
-            viewHolder.tag_layout = convertView.findViewById(R.id.tag_layout);
-            convertView.setTag(viewHolder);
-        } else {
-            viewHolder = (ViewHolder) convertView.getTag();
-        }
-
-        setTagToLayout(viewHolder.tag_layout, position);
-
-        return convertView;
-    }
-
     private void setTagToLayout(final LinearLayout tag_layout, int position) {
+        JCLoger.debug(tag_layout.getChildCount() + "-----");
         for (int i = 0; i < 3; i++) {
             final int p = position * 3 + i;
             if (p == tags.size()) {
@@ -71,8 +64,9 @@ public class TagAdapter extends BaseAdapter {
             }
             View view = LayoutInflater.from(context).inflate(R.layout.item_tag, tag_layout, false);
             final TextView mTag = view.findViewById(R.id.txt_tag);
-            mTag.setText(tags.get(p));
-            final int finalI = i;
+            String tagStr = tags.get(p);
+            tagStr = tagStr.length() > 10 ? (tagStr.substring(0, 9) + "...") : tagStr;
+            mTag.setText(tagStr);
             mTag.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -105,9 +99,13 @@ public class TagAdapter extends BaseAdapter {
         this.choiceTags = choiceTags;
     }
 
-    public class ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder{
         LinearLayout tag_layout;
 
+        public ViewHolder(View itemView) {
+            super(itemView);
+            tag_layout = itemView.findViewById(R.id.tag_layout);
+        }
     }
 
     public interface OnTagClickListener {

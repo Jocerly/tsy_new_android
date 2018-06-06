@@ -2,11 +2,15 @@ package com.tsy.tsy.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.DividerItemDecoration;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -21,6 +25,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
+import cn.tsy.base.uitls.JCLoger;
 import cn.tsy.base.views.CircleProgressBar;
 import cn.tsy.base.views.listView.CustomerListView;
 import cn.tsy.base.views.tagview.TagContainerLayout;
@@ -43,13 +48,11 @@ public class PublishFragment extends BaseFragment {
     List<String> tags = new ArrayList<>();
     @BindView(R.id.txt_tag_choices)
     TextView txtTagChoices;
-    @BindView(R.id.mListView)
-    CustomerListView mListView;
-
+    @BindView(R.id.tag_layout)
+    LinearLayout mtagLayout;
 
     private List<String> choiceTags = new ArrayList<>();
     int mWidth = 0;
-    private TagAdapter tagAdapter;
 
     @Nullable
     @Override
@@ -74,22 +77,13 @@ public class PublishFragment extends BaseFragment {
             }
         });
 
-        tagAdapter = new TagAdapter(aty, tags, mWidth);
-        tagAdapter.setOnTagClickListener(new TagAdapter.OnTagClickListener() {
-            @Override
-            public void tagClick(int positon, List<String> choices) {
-                choiceTags = choices;
-                showChoiceTags();
-            }
-        });
-        mListView.setAdapter(tagAdapter);
     }
 
     @Override
     public void initData(View view) {
         tags.add("重生成重生成神");
         tags.add("重生成神");
-        tags.add("重生成神生成神dsn ds ds dn");
+        tags.add("dsds dn");
         tags.add("重生");
         tags.add("成神");
         tags.add("重神");
@@ -102,17 +96,53 @@ public class PublishFragment extends BaseFragment {
         choiceTags.add(tags.get(2));
         choiceTags.add(tags.get(5));
         choiceTags.add(tags.get(6));
-
-//        int w = mWidth / 3 - getResources().getDimensionPixelSize(R.dimen.pad10) * 6;
-//        JCLoger.debug(w + "----" + mWidth);
         tagLayout.setTagMaxLength(10);
         tagLayout.setTags(tags);
 
-        tagAdapter.setChoiceTags(choiceTags);
-        tagAdapter.notifyDataSetChanged();
-
+        setTagToLayout(mtagLayout);
         showChoiceTags();
+    }
 
+    private void setTagToLayout(final LinearLayout tag_layout) {
+        int lines = tags.size() >= 12 ? 4 : tags.size() / 3 + ((tags.size() % 3) > 0 ? 1 : 0);
+        for (int i = 0; i < lines; i++) {
+            tag_layout.addView(setTagToLayout(i));
+        }
+    }
+
+
+    private LinearLayout setTagToLayout(int line) {
+        LinearLayout layout = new LinearLayout(aty);
+        for (int i = 0; i < 3; i++) {
+            final int p = line * 3 + i;
+            if (p < tags.size()) {
+                View view = LayoutInflater.from(aty).inflate(R.layout.item_tag, layout, false);
+                final TextView mTag = view.findViewById(R.id.txt_tag);
+                String tagStr = tags.get(p);
+                tagStr = tagStr.length() > 10 ? (tagStr.substring(0, 9) + "...") : tagStr;
+                mTag.setText(tagStr);
+                mTag.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (choiceTags.contains(tags.get(p))) {
+                            choiceTags.remove(tags.get(p));
+                            mTag.setBackgroundResource(R.drawable.tag_nomal);
+                        } else {
+                            choiceTags.add(tags.get(p));
+                            mTag.setBackgroundResource(R.drawable.tag_press);
+                        }
+                        showChoiceTags();
+                    }
+                });
+                if (choiceTags.contains(tags.get(p))) {
+                    mTag.setBackgroundResource(R.drawable.tag_press);
+                } else {
+                    mTag.setBackgroundResource(R.drawable.tag_nomal);
+                }
+                layout.addView(mTag);
+            }
+        }
+        return layout;
     }
 
     private void showChoiceTags() {
@@ -134,6 +164,11 @@ public class PublishFragment extends BaseFragment {
         progress2.setVisibility(View.GONE);
         progress1.setVisibility(View.VISIBLE);
         progress1.reStart();
+
+        choiceTags.clear();
+        mtagLayout.removeAllViews();
+        setTagToLayout(mtagLayout);
+        showChoiceTags();
     }
 
     @Override
