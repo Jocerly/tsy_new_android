@@ -1,5 +1,6 @@
 package com.tsy.tsy.fragment;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.annotation.Nullable;
@@ -19,6 +20,8 @@ import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.tsy.tsy.BaseFragment;
 import com.tsy.tsy.R;
 import com.tsy.tsy.dialog.SortDialog;
+import com.tsy.tsy.ui.AdActivity;
+import com.tsy.tsy.ui.WaveActivity;
 
 import java.io.File;
 
@@ -54,6 +57,8 @@ public class BuyFragment extends BaseFragment {
     RelativeLayout rlFilterSort;
     @BindView(R.id.btnDidi)
     Button btnDidi;
+    @BindView(R.id.btnWave)
+    Button btnWave;
 
     private SortDialog sortDialog;
 
@@ -141,5 +146,10 @@ public class BuyFragment extends BaseFragment {
     public void onDestroyView() {
         super.onDestroyView();
         unbinder.unbind();
+    }
+
+    @OnClick(R.id.btnWave)
+    public void onViewtnWaveClicked() {
+        showActivity(aty, WaveActivity.class);
     }
 }

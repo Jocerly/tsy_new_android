@@ -66,7 +66,7 @@ public class MemberCenterFragment extends BaseFragment {
         refreshLayout.setOnLoadMoreListener(new OnLoadMoreListener() {
             @Override
             public void onLoadMore(RefreshLayout refreshLayout) {
-                refreshLayout.finishLoadMore(1000, true, true);
+                refreshLayout.finishLoadMore(1000, true, false);
             }
         });
     }

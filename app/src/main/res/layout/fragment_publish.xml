@@ -14,13 +14,14 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <cn.tsy.base.views.CircleProgressBar
+            <cn.tsy.base.views.HeaderView.CircleProgressBar
                 android:id="@+id/progress1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 app:circle_color="#FF285A"
                 app:circle_color_init="#2FFF285A"
+                app:circle_radiu="15dp"
                 app:is_show_txt="false" />
 
             <ProgressBar

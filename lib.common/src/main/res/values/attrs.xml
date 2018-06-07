@@ -54,8 +54,8 @@
         <attr name="circle_height" format="integer"></attr>
         <attr name="circle_color_init" format="color"></attr>
         <attr name="circle_color" format="color"></attr>
-        <attr name="circle_radiu" format="integer"></attr>
-        <attr name="circle_stroke_width" format="integer"></attr>
+        <attr name="circle_radiu" format="dimension"></attr>
+        <attr name="circle_stroke_width" format="dimension"></attr>
         <attr name="is_show_txt" format="boolean"></attr>
 
     </declare-styleable>

@@ -73,6 +73,10 @@
             android:name=".ui.AdActivity"
             android:screenOrientation="portrait"></activity>
 
+        <activity
+            android:name=".ui.WaveActivity"
+            android:screenOrientation="portrait"></activity>
+
     </application>
 
 </manifest>

@@ -1,4 +1,4 @@
-package cn.tsy.base.views;
+package cn.tsy.base.views.HeaderView;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -35,6 +35,7 @@ public class CircleProgressBar extends View {
     private float mStrokeWidth = 5;//圆环宽度
     private float mRadius = 45;//园半径
     private float mHalfStrokeWidth;
+    private boolean isBack = false;
 
     private OnLoadListener onLoadListener;
 
@@ -61,8 +62,8 @@ public class CircleProgressBar extends View {
             isShowTxt = arr.getBoolean(R.styleable.CircleProgBar_is_show_txt, false);
             mInitCircleColor = arr.getColor(R.styleable.CircleProgBar_circle_color_init, Color.RED);
             mCircleColor = arr.getColor(R.styleable.CircleProgBar_circle_color, Color.RED);
-            mRadius = arr.getInt(R.styleable.CircleProgBar_circle_radiu, 45);
-            mStrokeWidth = arr.getInt(R.styleable.CircleProgBar_circle_radiu, 5);
+            mRadius = arr.getDimensionPixelSize(R.styleable.CircleProgBar_circle_radiu, 45);
+            mStrokeWidth = arr.getDimensionPixelSize(R.styleable.CircleProgBar_circle_stroke_width, 5);
             mHalfStrokeWidth = mStrokeWidth / 2;
         }
 
@@ -98,6 +99,7 @@ public class CircleProgressBar extends View {
 
     public void reStart() {
         mProgress = 0;
+        isBack = false;
         invalidate();
     }
 
@@ -147,6 +149,11 @@ public class CircleProgressBar extends View {
         }
     }
 
+    public void sucLoad() {
+        mProgress = 100;
+        isBack = false;
+        invalidate();
+    }
 
     public interface OnLoadListener {
         void sucLoad();
