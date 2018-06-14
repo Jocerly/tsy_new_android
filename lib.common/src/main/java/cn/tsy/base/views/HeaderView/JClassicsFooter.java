@@ -2,13 +2,14 @@ package cn.tsy.base.views.HeaderView;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.support.annotation.ColorInt;
 import android.support.annotation.NonNull;
 import android.util.AttributeSet;
 import android.util.TypedValue;
+import android.view.Gravity;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -21,7 +22,7 @@ import com.scwang.smartrefresh.layout.util.DensityUtil;
 
 import cn.tsy.base.R;
 
-import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
+import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
 
 /**
  * 自定义SmartRefreshLayout，的footerView
@@ -71,31 +72,16 @@ public class JClassicsFooter extends RelativeLayout implements RefreshFooter {
         mTitleText.setTextColor(0xff666666);
         mTitleText.setText(REFRESH_FOOTER_PULLUP);
 
-        RelativeLayout.LayoutParams lpBottomText = new LayoutParams(WRAP_CONTENT, WRAP_CONTENT);
+        RelativeLayout.LayoutParams lpBottomText = new LayoutParams(MATCH_PARENT,
+                context.getResources().getDimensionPixelOffset(R.dimen.pad50));
+        lpBottomText.leftMargin = context.getResources().getDimensionPixelOffset(R.dimen.pad15);
+        lpBottomText.rightMargin = context.getResources().getDimensionPixelOffset(R.dimen.pad15);
+        mTitleText.setGravity(Gravity.CENTER);
+        mTitleText.setBackgroundColor(Color.WHITE);
         lpBottomText.addRule(CENTER_IN_PARENT);
         addView(mTitleText, lpBottomText);
 
-        LayoutParams lpArrow = new LayoutParams(density.dip2px(20), density.dip2px(20));
-        lpArrow.addRule(CENTER_VERTICAL);
-        lpArrow.addRule(LEFT_OF, android.R.id.widget_frame);
-
-        LayoutParams lpProgress = new LayoutParams((ViewGroup.LayoutParams)lpArrow);
-        lpProgress.addRule(CENTER_VERTICAL);
-        lpProgress.addRule(LEFT_OF, android.R.id.widget_frame);
         TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.ClassicsFooter);
-
-        lpProgress.rightMargin = ta.getDimensionPixelSize(R.styleable.ClassicsFooter_srlDrawableMarginRight, density.dip2px(20));
-        lpArrow.rightMargin = lpProgress.rightMargin;
-
-        lpArrow.width = ta.getLayoutDimension(R.styleable.ClassicsHeader_srlDrawableArrowSize, lpArrow.width);
-        lpArrow.height = ta.getLayoutDimension(R.styleable.ClassicsHeader_srlDrawableArrowSize, lpArrow.height);
-        lpProgress.width = ta.getLayoutDimension(R.styleable.ClassicsHeader_srlDrawableProgressSize, lpProgress.width);
-        lpProgress.height = ta.getLayoutDimension(R.styleable.ClassicsHeader_srlDrawableProgressSize, lpProgress.height);
-
-        lpArrow.width = ta.getLayoutDimension(R.styleable.ClassicsHeader_srlDrawableSize, lpArrow.width);
-        lpArrow.height = ta.getLayoutDimension(R.styleable.ClassicsHeader_srlDrawableSize, lpArrow.height);
-        lpProgress.width = ta.getLayoutDimension(R.styleable.ClassicsHeader_srlDrawableSize, lpProgress.width);
-        lpProgress.height = ta.getLayoutDimension(R.styleable.ClassicsHeader_srlDrawableSize, lpProgress.height);
 
         mFinishDuration = ta.getInt(R.styleable.ClassicsFooter_srlFinishDuration, mFinishDuration);
         mSpinnerStyle = SpinnerStyle.values()[ta.getInt(R.styleable.ClassicsFooter_srlClassicsSpinnerStyle, mSpinnerStyle.ordinal())];

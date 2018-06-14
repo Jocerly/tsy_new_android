@@ -1,17 +1,13 @@
 package com.tsy.tsy.fragment;
 
-import android.content.ComponentName;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
-import android.os.Environment;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.TextView;
 
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
@@ -24,8 +20,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
-import cn.tsy.base.uitls.JCLoger;
-import dalvik.system.DexClassLoader;
+import cn.tsy.base.views.TimeDownView;
 
 /**
  * Created by Jocerly on 2018/4/16.
@@ -35,14 +30,12 @@ public class MemberCenterFragment extends BaseFragment {
     Unbinder unbinder;
     @BindView(R.id.button)
     Button button;
-    @BindView(R.id.textView)
-    TextView textView;
-    @BindView(R.id.button2)
-    Button button2;
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
     @BindView(R.id.refreshLayout)
     SmartRefreshLayout refreshLayout;
+    @BindView(R.id.timeDownView)
+    TimeDownView timeDownView;
 
     @Nullable
     @Override
@@ -73,6 +66,7 @@ public class MemberCenterFragment extends BaseFragment {
 
     @Override
     public void initData(View view) {
+        timeDownView.startTime();
     }
 
     @OnClick(R.id.button)
@@ -105,12 +99,6 @@ public class MemberCenterFragment extends BaseFragment {
                 toast(errCode + "----" + errMessage);
             }
         }, Checkversion.class);*/
-    }
-
-    @OnClick(R.id.button2)
-    public void intoPlugin() {
-        Intent intent = new Intent();
-        startActivity(intent);
     }
 
     @Override
