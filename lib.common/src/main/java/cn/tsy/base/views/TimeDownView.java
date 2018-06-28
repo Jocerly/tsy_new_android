@@ -1,5 +1,6 @@
 package cn.tsy.base.views;
 
+import android.app.AlarmManager;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -11,8 +12,10 @@ import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.View;
 
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.TimeZone;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -30,7 +33,11 @@ public class TimeDownView extends View {
     private int txtW = 70;
     private int gapW = 30;
     private int baseLineY1, baseLineY2, baseLineY3;
-    private long miao = 10000 * 1000;
+    private long miao = 0;
+    private Timer timer;
+    private DateFormat df1;
+    private DateFormat df2;
+    private DateFormat df3;
 
     public TimeDownView(Context context) {
         super(context);
@@ -71,6 +78,11 @@ public class TimeDownView extends View {
         baseLineY1 = (int) (rectF1.centerY() - top / 2 - bottom / 2);//基线中间点的y轴计算公式
         baseLineY2 = (int) (rectF2.centerY() - top / 2 - bottom / 2);//基线中间点的y轴计算公式
         baseLineY3 = (int) (rectF3.centerY() - top / 2 - bottom / 2);//基线中间点的y轴计算公式
+
+        timer = new Timer();
+        df1 = createDateFormat(HH);
+        df2 = createDateFormat(MM);
+        df3 = createDateFormat(SS);
     }
 
     @Override
@@ -93,32 +105,57 @@ public class TimeDownView extends View {
         canvas.drawText(ss, rectF3.centerX(), baseLineY3, paint1);
     }
 
-    public void startTime() {
-        new Timer().schedule(new TimerTask() {
+    public void startTime(long timeMiao) {
+        if (timeMiao < 1000) {
+            return;
+        }
+        miao = timeMiao + 1000;
+        timer.schedule(new TimerTask() {
             @Override
             public void run() {
                 miao -= 1000;
+                if (miao < 0) {
+                    miao = 0;
+                    timer.cancel();
+                }
                 handler.sendEmptyMessage(1);
             }
         }, 0, 1000);
+    }
+
+    public void setTimeChange() {
+        timer.cancel();
+        timer = new Timer();
+        startTime(miao);
     }
 
     Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
-            invalidate();
+            switch (msg.what) {
+                case 1:
+                    invalidate();
+                    break;
+            }
         }
     };
 
     @Override
     public void invalidate() {
-        SimpleDateFormat df = new SimpleDateFormat(HH);
-        hh = df.format(new Date(miao));
-        df = new SimpleDateFormat(MM);
-        mm = df.format(new Date(miao));
-        df = new SimpleDateFormat(SS);
-        ss = df.format(new Date(miao));
+        Date date = new Date(miao);
+        hh = df1.format(date);
+        mm = df2.format(date);
+        ss = df3.format(date);
         super.invalidate();
     }
+
+    private DateFormat createDateFormat(String pattern) {
+        SimpleDateFormat sdf = new SimpleDateFormat(pattern);
+        TimeZone gmt = TimeZone.getTimeZone("GMT");//关键所在
+        sdf.setTimeZone(gmt);
+        sdf.setLenient(true);
+        return sdf;
+    }
+
 }
