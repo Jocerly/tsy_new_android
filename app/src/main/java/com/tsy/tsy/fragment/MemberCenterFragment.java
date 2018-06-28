@@ -1,6 +1,8 @@
 package com.tsy.tsy.fragment;
 
 import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
@@ -15,6 +17,7 @@ import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.tsy.tsy.BaseFragment;
 import com.tsy.tsy.R;
+import com.tsy.tsy.service.DateTimeService;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -36,6 +39,9 @@ public class MemberCenterFragment extends BaseFragment {
     SmartRefreshLayout refreshLayout;
     @BindView(R.id.timeDownView)
     TimeDownView timeDownView;
+
+    private IntentFilter intentFilter;
+    private DateTimeService timeService;
 
     @Nullable
     @Override
@@ -66,7 +72,21 @@ public class MemberCenterFragment extends BaseFragment {
 
     @Override
     public void initData(View view) {
-        timeDownView.startTime();
+        //动态注册系统时间广播
+        intentFilter = new IntentFilter();
+        intentFilter.addAction(Intent.ACTION_TIMEZONE_CHANGED);//设置了系统时区
+        intentFilter.addAction(Intent.ACTION_TIME_CHANGED);//设置了系统时间
+
+        timeService = new DateTimeService();
+        timeService.setOnDateTimeChangeListener(new DateTimeService.OnDateTimeChangeListener() {
+            @Override
+            public void DateTimeChanged(String action) {
+                timeDownView.setTimeChange();
+            }
+        });
+        aty.registerReceiver(timeService, intentFilter);
+
+        timeDownView.startTime(200 * 1000);
     }
 
     @OnClick(R.id.button)
@@ -104,13 +124,12 @@ public class MemberCenterFragment extends BaseFragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-
     }
-
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
         unbinder.unbind();
+        aty.unregisterReceiver(timeService);
     }
 }
