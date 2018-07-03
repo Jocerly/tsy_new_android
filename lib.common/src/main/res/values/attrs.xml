@@ -116,4 +116,11 @@
         <attr name="tag_gravity" format="integer"></attr>
 
     </declare-styleable>
+
+    <declare-styleable name="TimeView">
+        <attr name="txt_color" format="integer"></attr>
+        <attr name="txt_size" format="integer"></attr>
+        <attr name="txt_bg" format="integer"></attr>
+
+    </declare-styleable>
 </resources>

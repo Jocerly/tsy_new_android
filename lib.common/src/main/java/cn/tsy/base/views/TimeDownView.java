@@ -2,6 +2,7 @@ package cn.tsy.base.views;
 
 import android.app.AlarmManager;
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -10,7 +11,13 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
+import android.util.TypedValue;
 import android.view.View;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+
+import com.scwang.smartrefresh.layout.constant.SpinnerStyle;
+import com.scwang.smartrefresh.layout.util.DensityUtil;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -21,88 +28,52 @@ import java.util.TimerTask;
 
 import cn.tsy.base.R;
 
-public class TimeDownView extends View {
-    private static final String HH = "HH";
-    private static final String MM = "mm";
-    private static final String SS = "ss";
+import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
 
+public class TimeDownView extends RelativeLayout {
     private Context mContext;
-    private Paint paint1, paint2;
-    private String hh = "00", mm = "00", ss = "00", gap = ":";
-    private RectF rectF1, rectF2, rectF3;
-    private int txtW = 70;
-    private int gapW = 30;
-    private int baseLineY1, baseLineY2, baseLineY3;
+    private static final String TIME = "HH:mm:ss";
+    private String time = "00:00:00";
     private long miao = 0;
     private Timer timer;
-    private DateFormat df1;
-    private DateFormat df2;
-    private DateFormat df3;
+    private DateFormat df;
+    private TextView mText;
+
+    private int txtColor, txtBg, txtSize;
 
     public TimeDownView(Context context) {
         super(context);
-        initView(context);
+        initView(context, null);
     }
 
     public TimeDownView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
-        initView(context);
+        initView(context, attrs);
     }
 
     public TimeDownView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
 
-        initView(context);
+        initView(context, attrs);
     }
 
-    private void initView(Context context) {
+    private void initView(Context context, AttributeSet attrs) {
         mContext = context;
 
-        paint1 = new Paint();
-        paint1.setColor(Color.WHITE);
-        paint1.setTextSize(context.getResources().getDimensionPixelOffset(R.dimen.font1));
-        paint1.setTextAlign(Paint.Align.CENTER);
+        TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.TimeView);
+        txtColor = ta.getInt(R.styleable.TimeView_txt_color, Color.RED);
+        txtBg = ta.getInt(R.styleable.TimeView_txt_bg, Color.WHITE);
+        txtSize = ta.getInt(R.styleable.TimeView_txt_size, 13);
 
-        paint2 = new Paint();
-        paint2.setColor(mContext.getResources().getColor(R.color.wave_color_5));
-        paint2.setTextSize(context.getResources().getDimensionPixelOffset(R.dimen.font2));
-        paint2.setTextAlign(Paint.Align.CENTER);
-
-        rectF1 = new RectF(0, 0, txtW, txtW);
-        rectF2 = new RectF(txtW + gapW, 0, txtW * 2 + gapW, txtW);
-        rectF3 = new RectF(txtW * 2 + gapW * 2, 0, txtW * 3 + gapW * 2, txtW);
-
-        Paint.FontMetrics fontMetrics = paint1.getFontMetrics();
-        float top = fontMetrics.top;//为基线到字体上边框的距离,即上图中的top
-        float bottom = fontMetrics.bottom;//为基线到字体下边框的距离,即上图中的bottom
-        baseLineY1 = (int) (rectF1.centerY() - top / 2 - bottom / 2);//基线中间点的y轴计算公式
-        baseLineY2 = (int) (rectF2.centerY() - top / 2 - bottom / 2);//基线中间点的y轴计算公式
-        baseLineY3 = (int) (rectF3.centerY() - top / 2 - bottom / 2);//基线中间点的y轴计算公式
+        mText = new TextView(mContext);
+        mText.setTextColor(txtColor);
+        mText.setTextSize(txtSize);
+        mText.setBackgroundColor(txtBg);
+        mText.setText(time);
+        addView(mText);
 
         timer = new Timer();
-        df1 = createDateFormat(HH);
-        df2 = createDateFormat(MM);
-        df3 = createDateFormat(SS);
-    }
-
-    @Override
-    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-    }
-
-    @Override
-    protected void onDraw(Canvas canvas) {
-        super.onDraw(canvas);
-        canvas.drawRect(rectF1, paint2);
-        canvas.drawText(hh, rectF1.centerX(), baseLineY1, paint1);
-        canvas.drawText(gap, rectF1.centerX() + txtW / 2 + gapW / 2, baseLineY1, paint2);
-
-        canvas.drawRect(rectF2, paint2);
-        canvas.drawText(mm, rectF2.centerX(), baseLineY2, paint1);
-        canvas.drawText(gap, rectF2.centerX() + txtW / 2 + gapW / 2, baseLineY2, paint2);
-
-        canvas.drawRect(rectF3, paint2);
-        canvas.drawText(ss, rectF3.centerX(), baseLineY3, paint1);
+        df = createDateFormat(TIME);
     }
 
     public void startTime(long timeMiao) {
@@ -136,18 +107,17 @@ public class TimeDownView extends View {
             switch (msg.what) {
                 case 1:
                     invalidate();
+
                     break;
             }
         }
     };
 
-    @Override
     public void invalidate() {
         Date date = new Date(miao);
-        hh = df1.format(date);
-        mm = df2.format(date);
-        ss = df3.format(date);
-        super.invalidate();
+        time = df.format(date);
+
+        mText.setText(time);
     }
 
     private DateFormat createDateFormat(String pattern) {

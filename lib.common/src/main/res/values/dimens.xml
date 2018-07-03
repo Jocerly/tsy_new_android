@@ -2,7 +2,8 @@
 <resources>
     <dimen name="pad50">50dp</dimen>
     <dimen name="pad15">15dp</dimen>
-    <dimen name="font1">13sp</dimen>
+    <dimen name="font1">12sp</dimen>
     <dimen name="font2">18sp</dimen>
+    <dimen name="pad70">70dp</dimen>
 
 </resources>
