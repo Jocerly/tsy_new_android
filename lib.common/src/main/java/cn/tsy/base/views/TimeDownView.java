@@ -7,6 +7,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.RectF;
+import android.os.CountDownTimer;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
@@ -34,10 +35,9 @@ public class TimeDownView extends RelativeLayout {
     private Context mContext;
     private static final String TIME = "HH:mm:ss";
     private String time = "00:00:00";
-    private long miao = 0;
-    private Timer timer;
     private DateFormat df;
     private TextView mText;
+    private CountDownTimer downTimer;
 
     private int txtColor, txtBg, txtSize;
 
@@ -72,7 +72,6 @@ public class TimeDownView extends RelativeLayout {
         mText.setText(time);
         addView(mText);
 
-        timer = new Timer();
         df = createDateFormat(TIME);
     }
 
@@ -80,44 +79,22 @@ public class TimeDownView extends RelativeLayout {
         if (timeMiao < 1000) {
             return;
         }
-        miao = timeMiao + 1000;
-        timer.schedule(new TimerTask() {
+        downTimer = new CountDownTimer(timeMiao, 1000) {
             @Override
-            public void run() {
-                miao -= 1000;
-                if (miao < 0) {
-                    miao = 0;
-                    timer.cancel();
-                }
-                handler.sendEmptyMessage(1);
+            public void onTick(long millisUntilFinished) {
+                invalidate(millisUntilFinished);
             }
-        }, 0, 1000);
+
+            @Override
+            public void onFinish() {
+                invalidate(0);
+            }
+        }.start();
     }
 
-    public void setTimeChange() {
-        timer.cancel();
-        timer = new Timer();
-        startTime(miao);
-    }
-
-    Handler handler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
-            switch (msg.what) {
-                case 1:
-                    invalidate();
-
-                    break;
-            }
-        }
-    };
-
-    public void invalidate() {
+    public void invalidate(long miao) {
         Date date = new Date(miao);
-        time = df.format(date);
-
-        mText.setText(time);
+        mText.setText(df.format(date));
     }
 
     private DateFormat createDateFormat(String pattern) {

@@ -40,9 +40,6 @@ public class MemberCenterFragment extends BaseFragment {
     @BindView(R.id.timeDownView)
     TimeDownView timeDownView;
 
-    private IntentFilter intentFilter;
-    private DateTimeService timeService;
-
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -72,20 +69,6 @@ public class MemberCenterFragment extends BaseFragment {
 
     @Override
     public void initData(View view) {
-        //动态注册系统时间广播
-        intentFilter = new IntentFilter();
-        intentFilter.addAction(Intent.ACTION_TIMEZONE_CHANGED);//设置了系统时区
-        intentFilter.addAction(Intent.ACTION_TIME_CHANGED);//设置了系统时间
-
-        timeService = new DateTimeService();
-        timeService.setOnDateTimeChangeListener(new DateTimeService.OnDateTimeChangeListener() {
-            @Override
-            public void DateTimeChanged(String action) {
-                timeDownView.setTimeChange();
-            }
-        });
-        aty.registerReceiver(timeService, intentFilter);
-
         timeDownView.startTime(200 * 1000);
     }
 
@@ -130,6 +113,5 @@ public class MemberCenterFragment extends BaseFragment {
     public void onDestroyView() {
         super.onDestroyView();
         unbinder.unbind();
-        aty.unregisterReceiver(timeService);
     }
 }
