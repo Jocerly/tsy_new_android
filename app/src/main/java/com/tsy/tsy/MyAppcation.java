@@ -6,6 +6,9 @@ import android.content.Context;
 import com.tsy.tsy.config.URLConfig;
 import com.zhy.autolayout.config.AutoLayoutConifg;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import cn.jpush.android.api.JPushInterface;
 import cn.tsy.base.uitls.JCLoger;
 
@@ -23,8 +26,15 @@ public class MyAppcation extends Application {
         JCLoger.openDebugLog(URLConfig.isDebug);
         AutoLayoutConifg.getInstance().useDeviceSize();
 
+        initJpushData();
+    }
+
+    private void initJpushData() {
         JPushInterface.setDebugMode(true);
         JPushInterface.init(this);
+        Set<String> stringSet = new HashSet<>();//设置tag
+        stringSet.add("googleplay");
+        JPushInterface.setTags(getApplicationContext(), stringSet, null);
     }
 
     @Override
