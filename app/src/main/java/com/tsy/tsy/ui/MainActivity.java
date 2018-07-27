@@ -16,6 +16,7 @@ import com.tsy.tsy.fragment.PublishFragment;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import cn.jpush.android.api.JPushInterface;
 import cn.tsy.base.uitls.JCLoger;
 
 /**
@@ -51,7 +52,7 @@ public class MainActivity extends BaseActivity {
 
     @Override
     public void initView() {
-
+        JPushInterface.resumePush(getApplicationContext());
     }
 
     @Override

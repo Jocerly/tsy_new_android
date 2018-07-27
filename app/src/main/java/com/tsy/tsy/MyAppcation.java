@@ -6,6 +6,7 @@ import android.content.Context;
 import com.tsy.tsy.config.URLConfig;
 import com.zhy.autolayout.config.AutoLayoutConifg;
 
+import cn.jpush.android.api.JPushInterface;
 import cn.tsy.base.uitls.JCLoger;
 
 /**
@@ -21,6 +22,9 @@ public class MyAppcation extends Application {
 
         JCLoger.openDebugLog(URLConfig.isDebug);
         AutoLayoutConifg.getInstance().useDeviceSize();
+
+        JPushInterface.setDebugMode(true);
+        JPushInterface.init(this);
     }
 
     @Override

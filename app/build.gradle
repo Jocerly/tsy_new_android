@@ -20,9 +20,16 @@ android {
 
         ndk {
             //选择要添加的对应cpu类型的.so库。
-            abiFilters 'armeabi'
+            abiFilters 'armeabi', 'x86', 'x86_64','mips64'
         }
+
+        manifestPlaceholders = [
+                JPUSH_PKGNAME : applicationId,
+                JPUSH_APPKEY  : "10ed7e28ef7f5bcc87b52e7b", //JPush上注册的包名对应的appkey.
+                JPUSH_CHANNEL : "google-play", //暂时填写默认值即可.
+        ]
     }
+
     signingConfigs {
         release {
             storeFile file("./jks/tsy_keystore.jks")
@@ -119,12 +126,13 @@ dependencies {
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
     implementation project(':lib.picture')
     implementation project(':lib.common')
-
     //组件化切换
     //    if (isModule.toBoolean()) {
     //    } else {
     //    }
     implementation 'com.android.support.constraint:constraint-layout:1.1.0'
+    implementation files('libs/jcore-android-1.2.3-google_play.jar')
+    implementation files('libs/jpush-android-3.1.5.jar')
 }
 repositories {
     mavenCentral()
