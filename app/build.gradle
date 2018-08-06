@@ -20,13 +20,13 @@ android {
 
         ndk {
             //选择要添加的对应cpu类型的.so库。
-            abiFilters 'armeabi', 'x86', 'x86_64','mips64'
+            abiFilters 'armeabi', 'x86', 'x86_64', 'mips64'
         }
 
         manifestPlaceholders = [
-                JPUSH_PKGNAME : applicationId,
-                JPUSH_APPKEY  : "10ed7e28ef7f5bcc87b52e7b", //JPush上注册的包名对应的appkey.
-                JPUSH_CHANNEL : "google-play", //暂时填写默认值即可.
+                JPUSH_PKGNAME: applicationId,
+                JPUSH_APPKEY : "10ed7e28ef7f5bcc87b52e7b", //JPush上注册的包名对应的appkey.
+                JPUSH_CHANNEL: "google-play", //暂时填写默认值即可.
         ]
     }
 
@@ -84,7 +84,7 @@ android {
         }
     }
 //    task ndkBuild(type: Exec) {//设置新的so的生成目录
-//        commandLine "E:\\Android\\sdk\\ndk-bundle\\ndk-build.cmd",
+//        commandLine "/Users/zxy/Library/Android/sdk/ndk-bundle/ndk-build",
 //                'NDK_PROJECT_PATH=build/intermediates/ndk',
 //                'NDK_LIBS_OUT=libs',
 //                'APP_BUILD_SCRIPT=jni/Android.mk',
