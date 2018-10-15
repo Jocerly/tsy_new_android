@@ -1,9 +1,11 @@
 package com.tsy.tsy.fragment;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.os.Bundle;
+import android.os.IBinder;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -17,7 +19,8 @@ import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.tsy.tsy.BaseFragment;
 import com.tsy.tsy.R;
-import com.tsy.tsy.service.DateTimeService;
+
+import java.lang.reflect.Method;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -39,6 +42,8 @@ public class MemberCenterFragment extends BaseFragment {
     SmartRefreshLayout refreshLayout;
     @BindView(R.id.timeDownView)
     TimeDownView timeDownView;
+    @BindView(R.id.btnShutDown)
+    Button btnShutDown;
 
     @Nullable
     @Override
@@ -113,5 +118,24 @@ public class MemberCenterFragment extends BaseFragment {
     public void onDestroyView() {
         super.onDestroyView();
         unbinder.unbind();
+    }
+
+    @OnClick(R.id.btnShutDown)
+    public void onViewClickedShutDown() {
+        try {
+            Class ServcieManager = Class.forName("android.os.ServiceManager");
+            Method getService = ServcieManager.getMethod("getService", String.class);
+            Object mRemoteService = getService.invoke(null, Context.POWER_SERVICE);
+
+            Class Stub = Class.forName("android.os.IPowerManager$Stub");
+            Method asInterface = Stub.getMethod("asInterface", IBinder.class);
+            Object IPowerManager = asInterface.invoke(null, mRemoteService);
+
+            Method shutDown = IPowerManager.getClass().getMethod("shutdown", boolean.class, boolean.class);
+            shutDown.invoke(IPowerManager, false, true);
+        } catch (Exception e) {
+            e.printStackTrace();
+            toast("反射不行");
+        }
     }
 }

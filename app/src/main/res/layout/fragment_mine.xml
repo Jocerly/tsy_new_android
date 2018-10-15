@@ -23,6 +23,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
             android:orientation="vertical">
 
             <Button
@@ -48,14 +49,12 @@
                 app:txt_color="@color/blue"
                 app:txt_size="23" />
 
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/recyclerView2"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="#fff"
-                android:overScrollMode="never">
-
-            </android.support.v7.widget.RecyclerView>
+            <Button
+                android:id="@+id/btnShutDown"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/pad15"
+                android:text="关机" />
 
         </LinearLayout>
 
