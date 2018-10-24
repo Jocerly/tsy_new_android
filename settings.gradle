@@ -1,1 +1,1 @@
-include ':app', ':lib.common', ':app.plugin', ':lib.picture', ':app.chajian'
+include ':app', ':lib.common', ':app.plugin', ':lib.picture', ':app.chajian', ':lib.javasun'
