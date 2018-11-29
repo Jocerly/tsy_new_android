@@ -50,11 +50,11 @@
                 app:txt_size="23" />
 
             <Button
-                android:id="@+id/btnEccCode"
+                android:id="@+id/btnShutDown"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/pad15"
-                android:text="ECC加密解密" />
+                android:text="关机" />
 
         </LinearLayout>
 

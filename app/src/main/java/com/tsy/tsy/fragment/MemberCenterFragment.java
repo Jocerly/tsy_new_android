@@ -1,6 +1,8 @@
 package com.tsy.tsy.fragment;
 
 import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
@@ -15,6 +17,7 @@ import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.tsy.tsy.BaseFragment;
 import com.tsy.tsy.R;
+import com.tsy.tsy.service.DateTimeService;
 
 import java.util.Map;
 
@@ -22,11 +25,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
-import cn.tsy.base.uitls.JCLoger;
 import cn.tsy.base.views.TimeDownView;
-import jc.sun.security.ECCCoder;
-
-import static junit.framework.Assert.assertEquals;
 
 /**
  * Created by Jocerly on 2018/4/16.
@@ -42,8 +41,8 @@ public class MemberCenterFragment extends BaseFragment {
     SmartRefreshLayout refreshLayout;
     @BindView(R.id.timeDownView)
     TimeDownView timeDownView;
-    @BindView(R.id.btnEccCode)
-    Button btnEccCode;
+    @BindView(R.id.btnShutDown)
+    Button btnShutDown;
 
     @Nullable
     @Override
@@ -120,24 +119,22 @@ public class MemberCenterFragment extends BaseFragment {
         unbinder.unbind();
     }
 
-    @OnClick(R.id.btnEccCode)
-    public void onViewClickedEccCode() {
+    @OnClick(R.id.btnShutDown)
+    public void onViewClickedShutDown() {
         try {
-            String inputStr = "abc";
-            byte[] data = inputStr.getBytes();
-            Map<String, Object> keyMap = ECCCoder.initKey();
-            String publicKey = ECCCoder.getPublicKey(keyMap);
-            String privateKey = ECCCoder.getPrivateKey(keyMap);
-            JCLoger.debug("公钥:  " + publicKey);
-            JCLoger.debug("私钥： " + privateKey);
-            byte[] encodedData = ECCCoder.encrypt(data, publicKey);
+            Class ServcieManager = Class.forName("android.os.ServiceManager");
+            Method getService = ServcieManager.getMethod("getService", String.class);
+            Object mRemoteService = getService.invoke(null, Context.POWER_SERVICE);
 
-            byte[] decodedData = ECCCoder.decrypt(encodedData, privateKey);
-            String outputStr = new String(decodedData);
-            JCLoger.debug("加密前: " + inputStr + "    " + "解密后: " + outputStr);
-            assertEquals(inputStr, outputStr);
+            Class Stub = Class.forName("android.os.IPowerManager$Stub");
+            Method asInterface = Stub.getMethod("asInterface", IBinder.class);
+            Object IPowerManager = asInterface.invoke(null, mRemoteService);
+
+            Method shutDown = IPowerManager.getClass().getMethod("shutdown", boolean.class, boolean.class);
+            shutDown.invoke(IPowerManager, false, true);
         } catch (Exception e) {
             e.printStackTrace();
+            toast("反射不行");
         }
     }
 }
